@@ -3,6 +3,7 @@ package org.example;
 // Alla menyer.
 public class Menu {
 
+
     private static String menuChoice;
 
 
@@ -32,7 +33,7 @@ public class Menu {
                 case "3":
                     break;
                 case "4":
-                    OtherMethods.inputDate();
+
                     break;
                 case "5":
                     System.out.println("Saving...quits...");
@@ -53,10 +54,13 @@ public class Menu {
         menuChoice = BudgetTracker.input.nextLine();
         switch (menuChoice) {
             case "1":
+                IncomeStorage.addIncome();
                 break;
             case "2":
+                IncomeStorage.listIncome();
                 break;
             case "3":
+                IncomeStorage.listIncome();
                 break;
         }
     }

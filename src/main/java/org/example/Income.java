@@ -8,4 +8,16 @@ public class Income extends Transaction{
         super(name, amount, date);
         this.category = category;
     }
+
+
+    public EIncomeCategory category() {
+        return category;
+    }
+
+    @Override
+    public String toString() {
+        return "Income{" +
+                "category=" + category +
+                '}' + super.toString();
+    }
 }

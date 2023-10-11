@@ -11,4 +11,25 @@ public class Transaction {
         this.amount = amount;
         this.date = date;
     }
+
+    public String name() {
+        return name;
+    }
+
+    public double amount() {
+        return amount;
+    }
+
+    public String date() {
+        return date;
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "name='" + name + '\'' +
+                ", amount=" + amount +
+                ", date='" + date + '\'' +
+                '}';
+    }
 }
