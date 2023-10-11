@@ -1,5 +1,9 @@
 package org.example;
 
 public enum EExpenseCategory {
-    FOOD, CLOTHES, GAS;
+    CLOTHES,
+    FOOD,
+    GAS,
+    HOUSEHOLD,
+    OTHER;
 }
