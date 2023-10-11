@@ -1,5 +1,6 @@
 package org.example;
 
+// Alla menyer.
 public class Menu {
 
     private static String menuChoice;
@@ -13,16 +14,19 @@ public class Menu {
         boolean isRunning = true;
         while (isRunning) {
             System.out.println("\nBUDGET TRACKER 3000-o-matic");
-            System.out.println("1. Incomes" +
-                    "\n2. Expenses" +
-                    "\n3. Show budget" +
-                    "\n4. Change user" +
-                    "\n5. Quit");
+            System.out.println("1. Incomes menu" +
+                               "\n2. Expenses menu" +
+                               "\n3. Show budget" +
+                               "\n4. Users menu" +
+                               "\n5. Quit");
+            System.out.print("Enter: ");
             menuChoice = BudgetTracker.input.nextLine();
             switch (menuChoice) {
                 case "1":
+                    incomeMenu();
                     break;
                 case "2":
+                    expenseMenu();
                     break;
                 case "3":
                     break;
@@ -36,7 +40,39 @@ public class Menu {
                     System.out.println("Please choose from the menu...");
             }
         }
-
-
+    }
+    private static void incomeMenu() {
+        // Add list income method
+        System.out.println("\nINCOME MENU");
+        System.out.println("1. Add income" +
+                           "\n2. Change income" +
+                           "\n3. Remove income");
+        System.out.print("Enter: ");
+        menuChoice = BudgetTracker.input.nextLine();
+        switch (menuChoice) {
+            case "1":
+                break;
+            case "2":
+                break;
+            case "3":
+                break;
+        }
+    }
+    private static void expenseMenu() {
+        // Add list expense method
+        System.out.println("\nEXPENSE MENU");
+        System.out.println("1. Add expense" +
+                "\n2. Change expense" +
+                "\n3. Remove expense");
+        System.out.print("Enter: ");
+        menuChoice = BudgetTracker.input.nextLine();
+        switch (menuChoice) {
+            case "1":
+                break;
+            case "2":
+                break;
+            case "3":
+                break;
+        }
     }
 }
