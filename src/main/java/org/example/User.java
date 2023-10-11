@@ -14,7 +14,8 @@ public class User {
         this.lastName = lastName;
     }
 
-    public User(String firstName) {
-        this.firstName = firstName;
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
     }
 }

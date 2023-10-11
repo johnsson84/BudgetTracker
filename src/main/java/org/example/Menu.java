@@ -14,6 +14,7 @@ public class Menu {
         boolean isRunning = true;
         while (isRunning) {
             System.out.println("\nBUDGET TRACKER 3000-o-matic");
+            System.out.println("User: " + BudgetTracker.userList.get(BudgetTracker.activeUser));
             System.out.println("1. Incomes menu" +
                                "\n2. Expenses menu" +
                                "\n3. Show budget" +
@@ -31,6 +32,7 @@ public class Menu {
                 case "3":
                     break;
                 case "4":
+                    OtherMethods.inputDate();
                     break;
                 case "5":
                     System.out.println("Saving...quits...");

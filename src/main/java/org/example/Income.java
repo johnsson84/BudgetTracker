@@ -4,8 +4,8 @@ public class Income extends Transaction{
 
     EIncomeCategory category;
 
-    public Income(double amount, String date, EIncomeCategory category) {
-        super(amount, date);
+    public Income(String name,double amount, String date, EIncomeCategory category) {
+        super(name, amount, date);
         this.category = category;
     }
 }

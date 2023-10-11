@@ -7,9 +7,10 @@ import java.util.Scanner;
 public class BudgetTracker {
     public static Scanner input = new Scanner(System.in);
     public static List<User> userList = new ArrayList<>();
+    public static short activeUser = 0;
 
     public static void main(String[] args) {
-        userList.add(new User("defaultuser"));
+        userList.add(new User("defaultuser", ""));
         Menu menu = new Menu();
     }
 }
