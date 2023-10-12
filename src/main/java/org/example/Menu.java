@@ -57,7 +57,7 @@ public class Menu {
                 IncomeStorage.addIncome();
                 break;
             case "2":
-                IncomeStorage.listIncome();
+                IncomeStorage.updateIncome();
                 break;
             case "3":
                 IncomeStorage.listIncome();

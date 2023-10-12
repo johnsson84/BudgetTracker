@@ -24,6 +24,7 @@ public class OtherMethods {
                 System.out.println("Cant be letters...");
             }
         }
+        BudgetTracker.input.nextLine();
         return shortNumber;
     }
 
@@ -40,6 +41,7 @@ public class OtherMethods {
                 System.out.println("Cant be letters...");
             }
         }
+        BudgetTracker.input.nextLine();
         return menuNumber;
     }
     // Metod för att returnera ett datum, standard är dagen datum men metoden tillåter mauell inmatning.
@@ -99,6 +101,24 @@ public class OtherMethods {
 
         }
         return date;
+    }
+    public static EIncomeCategory inIncomeCategory() {
+        for (EIncomeCategory cat : EIncomeCategory.values()) {
+            System.out.println(cat);
+        }
+        EIncomeCategory category;
+        while (true) {
+            try {
+                System.out.println("Enter category from the list: ");
+                String catInput = BudgetTracker.input.nextLine();
+                category = EIncomeCategory.valueOf(catInput.toUpperCase());
+                break;
+            }
+            catch (IllegalArgumentException e) {
+                System.out.println("Category not found");
+            }
+        }
+        return category;
     }
 
 

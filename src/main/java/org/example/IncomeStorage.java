@@ -6,15 +6,17 @@ public class IncomeStorage {
 
     }
 
-    private void saveFile() {
+    public void saveFile() {
 
     }
-    private void readFile() {
+    public void readFile() {
 
     }
     public static void listIncome() {
+        System.out.println();
         for (int i = 0; i < BudgetTracker.userList.get(BudgetTracker.activeUser).getIncomeList().size(); i++) {
-            System.out.println(BudgetTracker.userList.get(BudgetTracker.activeUser).getIncomeList().get(i).toString());
+            System.out.println((i+1) + ". " + BudgetTracker.userList.get(BudgetTracker.activeUser)
+                    .getIncomeList().get(i).toString());
         }
 
     }
@@ -25,29 +27,56 @@ public class IncomeStorage {
         double amount = OtherMethods.inputAmount();
         BudgetTracker.input.nextLine();
         String date = OtherMethods.inputDate();
-        for (EIncomeCategory cat : EIncomeCategory.values()) {
-            System.out.println(cat);
-        }
-        EIncomeCategory category;
-        while (true) {
-            try {
-                System.out.println("Enter category from the list: ");
-                String catInput = BudgetTracker.input.nextLine();
-                category = EIncomeCategory.valueOf(catInput);
-                break;
-            }
-            catch (IllegalArgumentException e) {
-                System.out.println("Category not found");
-            }
-        }
+        EIncomeCategory category = OtherMethods.inIncomeCategory();
         BudgetTracker.userList.get(BudgetTracker.activeUser)
                 .getIncomeList().add(new Income(name, amount, date, category));
         listIncome();
     }
-    private void updateIncome() {
+    public static void updateIncome() {
+        listIncome();
+        System.out.print("Enter row number for the income you want to change 0 to cancel: ");
+        short rowChoice = OtherMethods.shortNumber();
+        if (rowChoice > 0) {
+            rowChoice -= 1;
+            while (true) {
+                System.out.println("What do you want to change?");
+                System.out.println("(name, amount, date, category (0 to cancel))");
+                String changeThis = BudgetTracker.input.nextLine();
+                if (changeThis.equalsIgnoreCase("name")) {
+                    System.out.print("Enter new name: ");
+                    String name = BudgetTracker.input.nextLine();
+                    BudgetTracker.userList.get(BudgetTracker.activeUser).getIncomeList().get(rowChoice).setName(name);
+                    System.out.println("Name changed!");
+                    break;
+                }
+                if (changeThis.equalsIgnoreCase("amount")) {
+                    System.out.print("Enter new amount: ");
+                    double amount = OtherMethods.inputAmount();
+                    BudgetTracker.userList.get(BudgetTracker.activeUser).getIncomeList().get(rowChoice).setAmount(amount);
+                    System.out.println("Amount changed!");
+                    break;
+                }
+                if (changeThis.equalsIgnoreCase("date")) {
+                    System.out.println("Enter new date");
+                    String date = OtherMethods.inputDate();
+                    BudgetTracker.userList.get(BudgetTracker.activeUser).getIncomeList().get(rowChoice).setDate(date);
+                    System.out.println("Date changed!");
+                    break;
+                }
+                if (changeThis.equalsIgnoreCase("category")) {
+                    System.out.print("Enter new category: ");
+                    EIncomeCategory category = OtherMethods.inIncomeCategory();
+                    BudgetTracker.userList.get(BudgetTracker.activeUser).getIncomeList().get(rowChoice).setCategory(category);
+                    System.out.println("Category cahnged!");
+                    break;
+                }
+                if (changeThis.equalsIgnoreCase("0")) break;
 
+                else System.out.println("Invalid choice!");
+            }
+        }
     }
-    private void removeIncome() {
+    public void removeIncome() {
 
     }
 }

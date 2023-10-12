@@ -20,4 +20,8 @@ public class Income extends Transaction{
                 "category=" + category +
                 '}' + super.toString();
     }
+
+    public void setCategory(EIncomeCategory category) {
+        this.category = category;
+    }
 }
