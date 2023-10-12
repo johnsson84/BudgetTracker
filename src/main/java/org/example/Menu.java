@@ -31,6 +31,7 @@ public class Menu {
                     expenseMenu();
                     break;
                 case "3":
+                    IncomeStorage.listIncome();
                     break;
                 case "4":
 
@@ -60,7 +61,7 @@ public class Menu {
                 IncomeStorage.updateIncome();
                 break;
             case "3":
-                IncomeStorage.listIncome();
+                IncomeStorage.removeIncome();
                 break;
         }
     }
@@ -74,10 +75,13 @@ public class Menu {
         menuChoice = BudgetTracker.input.nextLine();
         switch (menuChoice) {
             case "1":
+                ExpenseStorage.addExpense();
                 break;
             case "2":
+                ExpenseStorage.updateIncome();
                 break;
             case "3":
+                ExpenseStorage.removeIncome();
                 break;
         }
     }

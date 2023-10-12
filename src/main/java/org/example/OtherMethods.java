@@ -13,18 +13,20 @@ public class OtherMethods {
         while (true) {
             try {
                 short number = BudgetTracker.input.nextShort();
+
                 if (number >= 0) {
                     shortNumber = number;
                     break;
                 }
                 else
-                    System.out.println("Cant be negative...");
+                    System.out.println("Cant be negative, try again...");
             }
             catch (InputMismatchException e) {
-                System.out.println("Cant be letters...");
+                System.out.println("Cant be letters, try again...");
+                BudgetTracker.input.nextLine();
             }
         }
-        BudgetTracker.input.nextLine();
+
         return shortNumber;
     }
 
@@ -34,14 +36,16 @@ public class OtherMethods {
         while (true) {
             try {
                 double number = BudgetTracker.input.nextDouble();
+
                 menuNumber = number;
                 break;
             }
             catch (InputMismatchException e) {
-                System.out.println("Cant be letters...");
+                System.out.println("Cant be letters, try again...");
+                BudgetTracker.input.nextLine();
             }
         }
-        BudgetTracker.input.nextLine();
+
         return menuNumber;
     }
     // Metod för att returnera ett datum, standard är dagen datum men metoden tillåter mauell inmatning.
@@ -121,5 +125,23 @@ public class OtherMethods {
         return category;
     }
 
+    public static EExpenseCategory inExpenseCategory() {
+        for (EExpenseCategory cat : EExpenseCategory.values()) {
+            System.out.println(cat);
+        }
+        EExpenseCategory category;
+        while (true) {
+            try {
+                System.out.println("Enter category from the list: ");
+                String catInput = BudgetTracker.input.nextLine();
+                category = EExpenseCategory.valueOf(catInput.toUpperCase());
+                break;
+            }
+            catch (IllegalArgumentException e) {
+                System.out.println("Category not found");
+            }
+        }
+        return category;
+    }
 
 }
