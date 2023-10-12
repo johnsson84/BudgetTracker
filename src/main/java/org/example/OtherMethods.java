@@ -106,6 +106,7 @@ public class OtherMethods {
         }
         return date;
     }
+    // Metod för att välja kategori för inkomst
     public static EIncomeCategory inIncomeCategory() {
         for (EIncomeCategory cat : EIncomeCategory.values()) {
             System.out.println(cat);
@@ -124,7 +125,7 @@ public class OtherMethods {
         }
         return category;
     }
-
+    // Metod för att välja kategori för utgift
     public static EExpenseCategory inExpenseCategory() {
         for (EExpenseCategory cat : EExpenseCategory.values()) {
             System.out.println(cat);
@@ -143,5 +144,7 @@ public class OtherMethods {
         }
         return category;
     }
+
+
 
 }

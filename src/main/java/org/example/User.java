@@ -1,5 +1,6 @@
 package org.example;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class User {
     private List<Expense> expenseList;
 
 
-    public User(String firstName, String lastName) {
+    public User(String firstName, String lastName) throws FileNotFoundException {
         this.firstName = firstName;
         this.lastName = lastName;
         incomeList = new ArrayList<>();
@@ -31,4 +32,7 @@ public class User {
     }
 
 
+    public String firstName() {
+        return firstName;
+    }
 }

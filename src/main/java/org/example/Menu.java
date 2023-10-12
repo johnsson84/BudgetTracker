@@ -1,5 +1,7 @@
 package org.example;
 
+import java.io.IOException;
+
 // Alla menyer.
 public class Menu {
 
@@ -7,14 +9,15 @@ public class Menu {
     private static String menuChoice;
 
 
-    public Menu() {
+    public Menu() throws IOException {
         mainMenu();
     }
 
-    private static void mainMenu() {
+    private static void mainMenu() throws IOException {
+        IncomeStorage.readFile();
         boolean isRunning = true;
         while (isRunning) {
-            System.out.println("\nBUDGET TRACKER 3000-o-matic");
+            System.out.println("\nBUDGET TRACKER");
             System.out.println("User: " + BudgetTracker.userList.get(BudgetTracker.activeUser));
             System.out.println("1. Incomes menu" +
                                "\n2. Expenses menu" +
@@ -32,6 +35,7 @@ public class Menu {
                     break;
                 case "3":
                     IncomeStorage.listIncome();
+
                     break;
                 case "4":
 
@@ -45,7 +49,7 @@ public class Menu {
             }
         }
     }
-    private static void incomeMenu() {
+    private static void incomeMenu() throws IOException {
         // Add list income method
         System.out.println("\nINCOME MENU");
         System.out.println("1. Add income" +

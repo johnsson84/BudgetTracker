@@ -24,15 +24,6 @@ public class Transaction {
         return date;
     }
 
-    @Override
-    public String toString() {
-        return "Transaction{" +
-                "name='" + name + '\'' +
-                ", amount=" + amount +
-                ", date='" + date + '\'' +
-                '}';
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -43,5 +34,15 @@ public class Transaction {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        /*return "name='" + name + '\'' +
+                ", amount=" + amount +
+                ", date=" + date + "}";
+
+         */
+        return "|Name: " + name + " |Amount: " + amount + "kr |Date: " + date;
     }
 }

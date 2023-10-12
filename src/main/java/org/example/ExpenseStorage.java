@@ -15,7 +15,7 @@ public class ExpenseStorage {
         System.out.println();
         for (int i = 0; i < BudgetTracker.userList.get(BudgetTracker.activeUser).getExpenseList().size(); i++) {
             System.out.println((i+1) + ". " + BudgetTracker.userList.get(BudgetTracker.activeUser)
-                    .getExpenseList().get(i).toString());
+                    .getExpenseList().get(i));
         }
 
     }

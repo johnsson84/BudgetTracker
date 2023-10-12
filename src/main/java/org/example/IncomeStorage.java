@@ -1,26 +1,49 @@
 package org.example;
 
+import com.google.gson.Gson;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class IncomeStorage {
 
     public IncomeStorage() {
 
     }
 
-    public static void saveFile() {
-
+    public static void saveFile() throws IOException {
+        Gson gson = new Gson();
+        String filename = BudgetTracker.userList.get(BudgetTracker.activeUser).firstName() + ".incomelist.json";
+        String path = "files/" + filename;
+        FileWriter write = new FileWriter(path);
+        gson.toJson(BudgetTracker.userList.get(BudgetTracker.activeUser).getIncomeList(), write);
+        write.close();
     }
-    public static void readFile() {
+    public static void readFile() throws FileNotFoundException {
+        Gson gson = new Gson();
+        for (int i = 0; i < BudgetTracker.userList.size(); i++) {
+            String filename = BudgetTracker.userList.get(i).firstName() + ".incomelist.json";
+            String path = "files/" + filename;
+            File file = new File(path);
+            List<Income> userlist = new ArrayList<>();
+            if (file.exists()) {
+                FileReader read = new FileReader(path);
+                userlist = gson.fromJson(read, ArrayList.class);
+                BudgetTracker.userList.get(i).getIncomeList().addAll(userlist);
+            }
+        }
 
-    }
+     }
     public static void listIncome() {
         System.out.println();
         for (int i = 0; i < BudgetTracker.userList.get(BudgetTracker.activeUser).getIncomeList().size(); i++) {
             System.out.println((i+1) + ". " + BudgetTracker.userList.get(BudgetTracker.activeUser)
-                    .getIncomeList().get(i).toString());
+                    .getIncomeList().get(i));
         }
 
     }
-    public static void addIncome() {
+    public static void addIncome() throws IOException {
         System.out.print("Enter name of the income: ");
         String name = BudgetTracker.input.nextLine();
         System.out.print("Enter amount: ");
@@ -31,6 +54,7 @@ public class IncomeStorage {
         BudgetTracker.userList.get(BudgetTracker.activeUser)
                 .getIncomeList().add(new Income(name, amount, date, category));
         listIncome();
+        saveFile();
     }
     public static void updateIncome() {
         if (!BudgetTracker.userList.get(BudgetTracker.activeUser).getIncomeList().isEmpty()) {
