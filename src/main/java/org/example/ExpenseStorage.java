@@ -1,25 +1,56 @@
 package org.example;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
 public class ExpenseStorage {
+
+    private static String filename = BudgetTracker.userList.get(BudgetTracker.activeUser).firstName() + ".expenselist.json";
+    private static String path = "files/" + filename;
+    static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     public ExpenseStorage() {
 
     }
 
-    public static void saveFile() {
+    public static void saveFile() throws IOException {
+        FileWriter write = new FileWriter(path);
+        gson.toJson(BudgetTracker.userList.get(BudgetTracker.activeUser).getExpenseList(), write);
+        write.close();
 
     }
-    public static void readFile() {
-
-    }
-    public static void listExpense() {
-        System.out.println();
-        for (int i = 0; i < BudgetTracker.userList.get(BudgetTracker.activeUser).getExpenseList().size(); i++) {
-            System.out.println((i+1) + ". " + BudgetTracker.userList.get(BudgetTracker.activeUser)
-                    .getExpenseList().get(i));
+    public static void readFile() throws IOException {
+        Type type = new TypeToken<ArrayList<Expense>>(){}.getType();
+        for (int i = 0; i < BudgetTracker.userList.size(); i++) {
+            File file = new File(path);
+            List<Expense> userlist;
+            if (file.exists()) {
+                FileReader read = new FileReader(path);
+                userlist = gson.fromJson(read, type);
+                BudgetTracker.userList.get(i).getExpenseList().addAll(userlist);
+            }
         }
 
     }
-    public static void addExpense() {
+    public static void listExpense() {
+        System.out.println("\nEXPENSE LIST");
+        if (!BudgetTracker.userList.get(BudgetTracker.activeUser).getExpenseList().isEmpty()) {
+            for (int i = 0; i < BudgetTracker.userList.get(BudgetTracker.activeUser).getExpenseList().size(); i++) {
+                System.out.println((i+1) + ". " + BudgetTracker.userList.get(BudgetTracker.activeUser)
+                        .getExpenseList().get(i));
+            }
+        } else System.out.println("List is empty.");
+
+    }
+    public static void addExpense() throws IOException {
         System.out.print("Enter name of the expense: ");
         String name = BudgetTracker.input.nextLine();
         System.out.print("Enter amount: ");
@@ -30,8 +61,9 @@ public class ExpenseStorage {
         BudgetTracker.userList.get(BudgetTracker.activeUser)
                 .getExpenseList().add(new Expense(name, amount, date, category));
         listExpense();
+        saveFile();
     }
-    public static void updateIncome() {
+    public static void updateExpense() throws IOException {
         if (!BudgetTracker.userList.get(BudgetTracker.activeUser).getExpenseList().isEmpty()) {
             listExpense();
             System.out.print("Enter row number for the expense you want to change 0 to cancel: ");
@@ -48,6 +80,7 @@ public class ExpenseStorage {
                         String name = BudgetTracker.input.nextLine();
                         BudgetTracker.userList.get(BudgetTracker.activeUser).getExpenseList().get(rowChoice).setName(name);
                         System.out.println("Name changed!");
+                        saveFile();
                         break;
                     }
                     if (changeThis.equalsIgnoreCase("amount")) {
@@ -56,6 +89,7 @@ public class ExpenseStorage {
                         BudgetTracker.input.nextLine();
                         BudgetTracker.userList.get(BudgetTracker.activeUser).getExpenseList().get(rowChoice).setAmount(amount);
                         System.out.println("Amount changed!");
+                        saveFile();
                         break;
                     }
                     if (changeThis.equalsIgnoreCase("date")) {
@@ -63,6 +97,7 @@ public class ExpenseStorage {
                         String date = OtherMethods.inputDate();
                         BudgetTracker.userList.get(BudgetTracker.activeUser).getExpenseList().get(rowChoice).setDate(date);
                         System.out.println("Date changed!");
+                        saveFile();
                         break;
                     }
                     if (changeThis.equalsIgnoreCase("category")) {
@@ -70,6 +105,7 @@ public class ExpenseStorage {
                         EExpenseCategory category = OtherMethods.inExpenseCategory();
                         BudgetTracker.userList.get(BudgetTracker.activeUser).getExpenseList().get(rowChoice).setCategory(category);
                         System.out.println("Category changed!");
+                        saveFile();
                         break;
                     }
                     if (changeThis.equalsIgnoreCase("0")) break;
@@ -83,7 +119,7 @@ public class ExpenseStorage {
         else System.out.println("List is empty!");
 
     }
-    public static void removeIncome() {
+    public static void removeExpense() throws IOException {
         if (!BudgetTracker.userList.get(BudgetTracker.activeUser).getExpenseList().isEmpty()) {
             listExpense();
             System.out.print("Enter row number for the income you want to change 0 to cancel: ");
@@ -92,6 +128,7 @@ public class ExpenseStorage {
                 rowChoice -= 1;
                 BudgetTracker.userList.get(BudgetTracker.activeUser).getExpenseList().remove(rowChoice);
                 System.out.println("Income removed!");
+                saveFile();
             }
         }
         else System.out.println("List is empty!");

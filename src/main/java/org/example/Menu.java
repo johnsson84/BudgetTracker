@@ -35,7 +35,7 @@ public class Menu {
                     break;
                 case "3":
                     IncomeStorage.listIncome();
-
+                    ExpenseStorage.listExpense();
                     break;
                 case "4":
 
@@ -69,7 +69,7 @@ public class Menu {
                 break;
         }
     }
-    private static void expenseMenu() {
+    private static void expenseMenu() throws IOException {
         // Add list expense method
         System.out.println("\nEXPENSE MENU");
         System.out.println("1. Add expense" +
@@ -82,10 +82,10 @@ public class Menu {
                 ExpenseStorage.addExpense();
                 break;
             case "2":
-                ExpenseStorage.updateIncome();
+                ExpenseStorage.updateExpense();
                 break;
             case "3":
-                ExpenseStorage.removeIncome();
+                ExpenseStorage.removeExpense();
                 break;
         }
     }

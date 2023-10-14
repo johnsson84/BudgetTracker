@@ -12,7 +12,6 @@ public class BudgetTracker {
 
     public static void main(String[] args) throws IOException {
         userList.add(new User("defaultuser", ""));
-        User johan = new User("Johan", "Johnsson");
         Menu menu = new Menu();
     }
 }
