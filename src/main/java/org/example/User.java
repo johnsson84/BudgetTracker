@@ -35,4 +35,8 @@ public class User {
     public String firstName() {
         return firstName;
     }
+
+    public String lastName() {
+        return lastName;
+    }
 }

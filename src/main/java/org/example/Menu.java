@@ -102,7 +102,8 @@ public class Menu {
                 OtherMethods.addUser();
                 break;
             case "2":
-
+                OtherMethods.listUsers();
+                OtherMethods.changeUser();
                 break;
             case "3":
 

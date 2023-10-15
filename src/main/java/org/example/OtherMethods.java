@@ -150,6 +150,15 @@ public class OtherMethods {
         return category;
     }
 
+    // List users.
+    public static void listUsers() {
+        System.out.println("\nUSERS");
+        for (int i = 0; i < BudgetTracker.userList.size(); i++) {
+            System.out.println((i+1) + ". " + BudgetTracker.userList.get(i).firstName() +
+                    BudgetTracker.userList.get(i).lastName());
+        }
+    }
+
     // Add user
     public static void addUser() throws FileNotFoundException {
         System.out.print("Enter name: ");
@@ -160,6 +169,21 @@ public class OtherMethods {
         System.out.println("User created!");
     }
 
+    // Change user
+    public static void changeUser() {
+        while (true) {
+            System.out.print("\nChange to user (number): ");
+            short userNumber = shortNumber();
+            BudgetTracker.input.nextLine();
+            if (userNumber > 0 && userNumber < (BudgetTracker.userList.size() + 1)) {
+                userNumber -= 1;
+                BudgetTracker.activeUser = (userNumber);
+                System.out.println("User changed!");
+                break;
+            }
+            else System.out.println("Wrong user input, try again...");
+        }
 
+    }
 
 }
