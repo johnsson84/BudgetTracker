@@ -1,10 +1,15 @@
 package org.example;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.InputMismatchException;
 
 // Ställe för att ha extra metoder som jag annars hade kladdat ner main med.
 public class OtherMethods {
+    private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     // Metod för att välja index i en lista eller en annan låg siffra.
     // Short för mindre minnesavtryck. Sållar ut bokstäver och negativa tal.
@@ -143,6 +148,16 @@ public class OtherMethods {
             }
         }
         return category;
+    }
+
+    // Add user
+    public static void addUser() throws FileNotFoundException {
+        System.out.print("Enter name: ");
+        String name = BudgetTracker.input.nextLine();
+        System.out.print("Enter lastname: ");
+        String lastname = BudgetTracker.input.nextLine();
+        BudgetTracker.userList.add(new User(name, lastname));
+        System.out.println("User created!");
     }
 
 

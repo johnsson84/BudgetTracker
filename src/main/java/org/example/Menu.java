@@ -36,7 +36,7 @@ public class Menu {
                     ExpenseStorage.listExpense();
                     break;
                 case "4":
-
+                    userMenu();
                     break;
                 case "5":
                     System.out.println("Saving...quits...");
@@ -85,6 +85,27 @@ public class Menu {
                 break;
             case "3":
                 ExpenseStorage.removeExpense();
+                break;
+        }
+    }
+
+    // User menu.
+    private static void userMenu() throws IOException {
+        System.out.println("\nUSER MENU");
+        System.out.println("1. Add user" +
+                "\n2. Change user" +
+                "\n3. Remove user");
+        System.out.print("Enter: ");
+        menuChoice = BudgetTracker.input.nextLine();
+        switch (menuChoice) {
+            case "1":
+                OtherMethods.addUser();
+                break;
+            case "2":
+
+                break;
+            case "3":
+
                 break;
         }
     }
