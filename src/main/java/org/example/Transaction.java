@@ -38,11 +38,6 @@ public class Transaction {
 
     @Override
     public String toString() {
-        /*return "name='" + name + '\'' +
-                ", amount=" + amount +
-                ", date=" + date + "}";
-
-         */
         return "|Name: " + name + " |Amount: " + amount + "kr |Date: " + date;
     }
 }

@@ -2,19 +2,17 @@ package org.example;
 
 import java.io.IOException;
 
-// Alla menyer.
+// A class with all menus.
 public class Menu {
-
-
     private static String menuChoice;
-
 
     public Menu() throws IOException {
         mainMenu();
     }
 
+    // Main menu
     private static void mainMenu() throws IOException {
-        IncomeStorage.readFile();
+        IncomeStorage.readFile(); // Läser in filer om  dem finns.
         boolean isRunning = true;
         while (isRunning) {
             System.out.println("\nBUDGET TRACKER");
@@ -49,6 +47,7 @@ public class Menu {
             }
         }
     }
+    // Income menu
     private static void incomeMenu() throws IOException {
         // Add list income method
         System.out.println("\nINCOME MENU");
@@ -69,8 +68,8 @@ public class Menu {
                 break;
         }
     }
+    // Expense menu.
     private static void expenseMenu() throws IOException {
-        // Add list expense method
         System.out.println("\nEXPENSE MENU");
         System.out.println("1. Add expense" +
                 "\n2. Change expense" +

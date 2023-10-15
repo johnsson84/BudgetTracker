@@ -11,19 +11,22 @@ import java.util.List;
 
 public class IncomeStorage {
 
-    private static String filename = BudgetTracker.userList.get(BudgetTracker.activeUser).firstName() + ".incomelist.json";
+    private static String filename = BudgetTracker.userList
+            .get(BudgetTracker.activeUser)
+            .firstName() + ".incomelist.json";
     private static String path = "files/" + filename;
-    static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public IncomeStorage() {
-
-    }
-
+    // Save user specific file.
     public static void saveFile() throws IOException {
         FileWriter write = new FileWriter(path);
-        gson.toJson(BudgetTracker.userList.get(BudgetTracker.activeUser).getIncomeList(), write);
+        gson.toJson(BudgetTracker.userList
+                .get(BudgetTracker.activeUser)
+                .getIncomeList(), write);
         write.close();
     }
+
+    // Read all users income files.
     public static void readFile() throws IOException {
         Type type = new TypeToken<ArrayList<Income>>(){}.getType();
         for (int i = 0; i < BudgetTracker.userList.size(); i++) {
@@ -37,6 +40,8 @@ public class IncomeStorage {
         }
 
      }
+
+    // List items in income list.
     public static void listIncome() {
         System.out.println("\nINCOME LIST");
         if (!BudgetTracker.userList.get(BudgetTracker.activeUser).getIncomeList().isEmpty()) {
@@ -46,6 +51,8 @@ public class IncomeStorage {
             }
         } else System.out.println("List is empty.");
     }
+
+    // Add to income list
     public static void addIncome() throws IOException {
         System.out.print("Enter name of the income: ");
         String name = BudgetTracker.input.nextLine();
@@ -59,6 +66,8 @@ public class IncomeStorage {
         listIncome();
         saveFile();
     }
+
+    // Change one value on an item in income list.
     public static void updateIncome() throws IOException {
         if (!BudgetTracker.userList.get(BudgetTracker.activeUser).getIncomeList().isEmpty()) {
             listIncome();
@@ -115,6 +124,8 @@ public class IncomeStorage {
         else System.out.println("List is empty!");
 
     }
+
+    // Remove an item from list.
     public static void removeIncome() throws IOException {
         if (!BudgetTracker.userList.get(BudgetTracker.activeUser).getIncomeList().isEmpty()) {
             listIncome();

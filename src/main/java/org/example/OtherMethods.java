@@ -32,12 +32,12 @@ public class OtherMethods {
 
     //För inkomst och utgifts summor
     public static double inputAmount() {
-        double menuNumber = 0;
+        double sum = 0;
         while (true) {
             try {
                 double number = BudgetTracker.input.nextDouble();
 
-                menuNumber = number;
+                sum = number;
                 break;
             }
             catch (InputMismatchException e) {
@@ -46,9 +46,9 @@ public class OtherMethods {
             }
         }
 
-        return menuNumber;
+        return sum;
     }
-    // Metod för att returnera ett datum, standard är dagen datum men metoden tillåter mauell inmatning.
+    // Metod för att returnera ett datum, standard är dagens datum men metoden tillåter mauell inmatning.
     public static String inputDate() {
         LocalDate todaysDate = LocalDate.now();
         String date = todaysDate.toString(); // ställ in dagens datum

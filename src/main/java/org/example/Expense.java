@@ -15,11 +15,6 @@ public class Expense extends Transaction {
 
     @Override
     public String toString() {
-        /*return "{" +
-                "category=" + category +
-                ", " + super.toString();
-
-         */
         return super.toString() + " |Category: " + category;
     }
 

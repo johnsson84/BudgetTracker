@@ -21,12 +21,15 @@ public class ExpenseStorage {
 
     }
 
+    // Save user specific file.
     public static void saveFile() throws IOException {
         FileWriter write = new FileWriter(path);
         gson.toJson(BudgetTracker.userList.get(BudgetTracker.activeUser).getExpenseList(), write);
         write.close();
 
     }
+
+    // Read all users expense files.
     public static void readFile() throws IOException {
         Type type = new TypeToken<ArrayList<Expense>>(){}.getType();
         for (int i = 0; i < BudgetTracker.userList.size(); i++) {
@@ -40,6 +43,8 @@ public class ExpenseStorage {
         }
 
     }
+
+    // List items in expense list.
     public static void listExpense() {
         System.out.println("\nEXPENSE LIST");
         if (!BudgetTracker.userList.get(BudgetTracker.activeUser).getExpenseList().isEmpty()) {
@@ -50,6 +55,8 @@ public class ExpenseStorage {
         } else System.out.println("List is empty.");
 
     }
+
+    // Add to income list
     public static void addExpense() throws IOException {
         System.out.print("Enter name of the expense: ");
         String name = BudgetTracker.input.nextLine();
@@ -63,6 +70,8 @@ public class ExpenseStorage {
         listExpense();
         saveFile();
     }
+
+    // Change one value on an item in expense list.
     public static void updateExpense() throws IOException {
         if (!BudgetTracker.userList.get(BudgetTracker.activeUser).getExpenseList().isEmpty()) {
             listExpense();
@@ -119,6 +128,8 @@ public class ExpenseStorage {
         else System.out.println("List is empty!");
 
     }
+
+    // Remove an item from list.
     public static void removeExpense() throws IOException {
         if (!BudgetTracker.userList.get(BudgetTracker.activeUser).getExpenseList().isEmpty()) {
             listExpense();
