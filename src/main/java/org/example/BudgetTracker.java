@@ -11,7 +11,11 @@ public class BudgetTracker {
     public static short activeUser = 0;
 
     public static void main(String[] args) throws IOException {
-        userList.add(new User("defaultuser", ""));
+        OtherMethods.readUsers();
+        OtherMethods.addDefaultUser();
+        // Reads income and expense files.
+        IncomeStorage.readFile();
+        ExpenseStorage.readFile();
         Menu menu = new Menu();
     }
 }

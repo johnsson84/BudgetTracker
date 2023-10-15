@@ -2,10 +2,14 @@ package org.example;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.lang.reflect.Type;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 
 // Ställe för att ha extra metoder som jag annars hade kladdat ner main med.
 public class OtherMethods {
@@ -150,27 +154,54 @@ public class OtherMethods {
         return category;
     }
 
+    public static void addDefaultUser() throws IOException {
+        if (BudgetTracker.userList.isEmpty()) {
+            BudgetTracker.userList.add(new User("defaultuser", ""));
+            saveUser();
+        }
+    }
+
     // List users.
     public static void listUsers() {
         System.out.println("\nUSERS");
         for (int i = 0; i < BudgetTracker.userList.size(); i++) {
             System.out.println((i+1) + ". " + BudgetTracker.userList.get(i).firstName() +
-                    BudgetTracker.userList.get(i).lastName());
+                    " " + BudgetTracker.userList.get(i).lastName());
+        }
+    }
+
+    // Save users
+    public static void saveUser() throws IOException {
+        FileWriter write = new FileWriter("files/userlist.json");
+        gson.toJson(BudgetTracker.userList, write);
+        write.close();
+    }
+
+    // Read in users
+    public static void readUsers() throws FileNotFoundException {
+        Type type = new TypeToken<ArrayList<User>>() {}.getType();
+        File file = new File("files/userlist.json");
+        List<User> users;
+        if (file.exists()) {
+            FileReader read = new FileReader(file);
+            users = gson.fromJson(read, type);
+            BudgetTracker.userList.addAll(users);
         }
     }
 
     // Add user
-    public static void addUser() throws FileNotFoundException {
+    public static void addUser() throws IOException {
         System.out.print("Enter name: ");
         String name = BudgetTracker.input.nextLine();
         System.out.print("Enter lastname: ");
         String lastname = BudgetTracker.input.nextLine();
         BudgetTracker.userList.add(new User(name, lastname));
         System.out.println("User created!");
+        saveUser();
     }
 
     // Change user
-    public static void changeUser() {
+    public static void changeUser() throws IOException {
         while (true) {
             System.out.print("\nChange to user (number): ");
             short userNumber = shortNumber();
@@ -178,6 +209,8 @@ public class OtherMethods {
             if (userNumber > 0 && userNumber < (BudgetTracker.userList.size() + 1)) {
                 userNumber -= 1;
                 BudgetTracker.activeUser = (userNumber);
+                IncomeStorage.readFile();
+                ExpenseStorage.readFile();
                 System.out.println("User changed!");
                 break;
             }

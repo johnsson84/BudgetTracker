@@ -12,7 +12,6 @@ public class Menu {
 
     // Main menu
     private static void mainMenu() throws IOException {
-        IncomeStorage.readFile(); // Läser in filer om  dem finns.
         boolean isRunning = true;
         while (isRunning) {
             System.out.println("\nBUDGET TRACKER");
@@ -36,10 +35,11 @@ public class Menu {
                     ExpenseStorage.listExpense();
                     break;
                 case "4":
+                    // System.out.println("Not implemented yet");
                     userMenu();
                     break;
                 case "5":
-                    System.out.println("Saving...quits...");
+                    System.out.println("quitting...");
                     isRunning = false;
                     break;
                 default:
