@@ -1,10 +1,6 @@
 [
   {
-    "firstName": "defaultuser",
-    "lastName": ""
-  },
-  {
-    "firstName": "Johan",
-    "lastName": "Johnsson"
+    "firstName": "default",
+    "lastName": "user"
   }
 ]

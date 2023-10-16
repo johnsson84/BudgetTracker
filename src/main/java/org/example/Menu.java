@@ -14,12 +14,13 @@ public class Menu {
     private static void mainMenu() throws IOException {
         boolean isRunning = true;
         while (isRunning) {
+            OtherMethods.addDefaultUser();
             System.out.println("\nBUDGET TRACKER");
             System.out.println("User: " + BudgetTracker.userList.get(BudgetTracker.activeUser));
-            System.out.println("1. Incomes menu" +
-                               "\n2. Expenses menu" +
+            System.out.println("1. Incomes" +
+                               "\n2. Expenses" +
                                "\n3. Show budget" +
-                               "\n4. Users menu" +
+                               "\n4. Users" +
                                "\n5. Quit");
             System.out.print("Enter: ");
             menuChoice = BudgetTracker.input.nextLine();
@@ -72,8 +73,8 @@ public class Menu {
     private static void expenseMenu() throws IOException {
         System.out.println("\nEXPENSE MENU");
         System.out.println("1. Add expense" +
-                "\n2. Change expense" +
-                "\n3. Remove expense");
+                         "\n2. Change expense" +
+                         "\n3. Remove expense");
         System.out.print("Enter: ");
         menuChoice = BudgetTracker.input.nextLine();
         switch (menuChoice) {
@@ -93,8 +94,8 @@ public class Menu {
     private static void userMenu() throws IOException {
         System.out.println("\nUSER MENU");
         System.out.println("1. Add user" +
-                "\n2. Change user" +
-                "\n3. Remove user");
+                         "\n2. Change user" +
+                         "\n3. Remove user");
         System.out.print("Enter: ");
         menuChoice = BudgetTracker.input.nextLine();
         switch (menuChoice) {
@@ -102,11 +103,10 @@ public class Menu {
                 OtherMethods.addUser();
                 break;
             case "2":
-                OtherMethods.listUsers();
                 OtherMethods.changeUser();
                 break;
             case "3":
-
+                OtherMethods.removeUser();
                 break;
         }
     }

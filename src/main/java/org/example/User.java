@@ -1,45 +1,41 @@
 package org.example;
 
-import java.io.FileNotFoundException;
-import java.util.List;
-
 public class User {
     private String firstName;
     private String lastName;
-    private List<Income> incomeList;
-    private List<Expense> expenseList;
 
-
-    public User(String firstName, String lastName) throws FileNotFoundException {
+    public User(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        //incomeList = new ArrayList<>();
-        //expenseList = new ArrayList<>();
+    }
+
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String fileIncome() {
+        return firstName + "-" + lastName + "-income.json";
+    }
+
+    public String fileExpense() {
+        return firstName + "-" + lastName + "-expense.json";
     }
 
     @Override
     public String toString() {
         return firstName + " " + lastName;
-    }
-
-    /*public List<Income> getIncomeList() {
-        return incomeList;
-    }
-
-     */
-
-    /*public List<Expense> getExpenseList() {
-        return expenseList;
-    }
-
-     */
-
-
-    public String firstName() {
-        return firstName;
-    }
-
-    public String lastName() {
-        return lastName;
     }
 }

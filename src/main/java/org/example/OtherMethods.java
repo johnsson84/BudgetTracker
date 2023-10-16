@@ -123,7 +123,7 @@ public class OtherMethods {
         EIncomeCategory category;
         while (true) {
             try {
-                System.out.println("Enter category from the list: ");
+                System.out.print("Enter category from the list: ");
                 String catInput = BudgetTracker.input.nextLine();
                 category = EIncomeCategory.valueOf(catInput.toUpperCase());
                 break;
@@ -142,7 +142,7 @@ public class OtherMethods {
         EExpenseCategory category;
         while (true) {
             try {
-                System.out.println("Enter category from the list: ");
+                System.out.print("Enter category from the list: ");
                 String catInput = BudgetTracker.input.nextLine();
                 category = EExpenseCategory.valueOf(catInput.toUpperCase());
                 break;
@@ -156,7 +156,7 @@ public class OtherMethods {
 
     public static void addDefaultUser() throws IOException {
         if (BudgetTracker.userList.isEmpty()) {
-            BudgetTracker.userList.add(new User("defaultuser", ""));
+            BudgetTracker.userList.add(new User("default", "user"));
             saveUser();
         }
     }
@@ -165,8 +165,8 @@ public class OtherMethods {
     public static void listUsers() {
         System.out.println("\nUSERS");
         for (int i = 0; i < BudgetTracker.userList.size(); i++) {
-            System.out.println((i+1) + ". " + BudgetTracker.userList.get(i).firstName() +
-                    " " + BudgetTracker.userList.get(i).lastName());
+            System.out.println((i+1) + ". " + BudgetTracker.userList.get(i).getFirstName() +
+                    " " + BudgetTracker.userList.get(i).getLastName());
         }
     }
 
@@ -178,7 +178,8 @@ public class OtherMethods {
     }
 
     // Read in users
-    public static void readUsers() throws FileNotFoundException {
+    public static void readUsers() throws IOException {
+
         Type type = new TypeToken<ArrayList<User>>() {}.getType();
         File file = new File("files/userlist.json");
         List<User> users;
@@ -202,6 +203,7 @@ public class OtherMethods {
 
     // Change user
     public static void changeUser() throws IOException {
+        listUsers();
         while (true) {
             System.out.print("\nChange to user (number): ");
             short userNumber = shortNumber();
@@ -219,4 +221,38 @@ public class OtherMethods {
 
     }
 
+    public static void removeUser() throws IOException {
+        if (!BudgetTracker.userList.isEmpty()) {
+            listUsers();
+            System.out.print("Enter row number for the income you want to change 0 to cancel: ");
+            short rowChoice = OtherMethods.shortNumber();
+            BudgetTracker.input.nextLine();
+            if (rowChoice > 0) {
+                rowChoice -= 1;
+                while (true) {
+                    System.out.print("Are you sure? This also deletes users files (yes or no): ");
+                    String deleteAnswer = BudgetTracker.input.nextLine().toLowerCase();
+                    if (deleteAnswer.equals("yes")) {
+                        File incomeFile = new File("files/" + BudgetTracker.userList.get(rowChoice).fileIncome());
+                        File expenseFile = new File("files/" + BudgetTracker.userList.get(rowChoice).fileExpense());
+                        incomeFile.delete();
+                        expenseFile.delete();
+                        IncomeStorage.getIncomeList().clear();
+                        ExpenseStorage.getExpenseList().clear();
+                        BudgetTracker.userList.remove(rowChoice);
+                        System.out.println("User removed!");
+                        BudgetTracker.activeUser = 0;
+                        saveUser();
+                        break;
+                    }
+                    else if (deleteAnswer.equals("no")) break;
+                    else System.out.println("Wrong input!");
+                }
+
+            }
+        }
+        else System.out.println("List is empty!");
+    }
 }
+
+

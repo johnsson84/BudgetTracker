@@ -19,7 +19,7 @@ public class IncomeStorage {
 
     // Save user specific file.
     public static void saveFile() throws IOException {
-        filename = BudgetTracker.userList.get(BudgetTracker.activeUser).firstName() + "-incomelist.json";
+        filename = BudgetTracker.userList.get(BudgetTracker.activeUser).fileIncome();
         path = "files/" + filename;
         FileWriter write = new FileWriter(path);
         gson.toJson(incomeList, write);
@@ -28,7 +28,7 @@ public class IncomeStorage {
 
     // Read all users income files.
     public static void readFile() throws IOException {
-        filename = BudgetTracker.userList.get(BudgetTracker.activeUser).firstName() + "-incomelist.json";
+        filename = BudgetTracker.userList.get(BudgetTracker.activeUser).fileIncome();
         path = "files/" + filename;
         Type type = new TypeToken<ArrayList<Income>>(){}.getType();
         File file = new File(path);
@@ -73,7 +73,7 @@ public class IncomeStorage {
             System.out.print("Enter row number for the income you want to change 0 to cancel: ");
             short rowChoice = OtherMethods.shortNumber();
             BudgetTracker.input.nextLine();
-            if (rowChoice > 0 && rowChoice < incomeList.size()) {
+            if (rowChoice > 0 && rowChoice < (incomeList.size() + 1)) {
                 rowChoice -= 1;
                 while (true) {
                     System.out.println("What do you want to change?");
@@ -128,7 +128,7 @@ public class IncomeStorage {
     public static void removeIncome() throws IOException {
         if (!incomeList.isEmpty()) {
             listIncome();
-            System.out.print("Enter row number for the income you want to change 0 to cancel: ");
+            System.out.print("Enter row number for the income you want to remove 0 to cancel: ");
             short rowChoice = OtherMethods.shortNumber();
             BudgetTracker.input.nextLine();
             if (rowChoice > 0) {
@@ -140,4 +140,8 @@ public class IncomeStorage {
         }
         else System.out.println("List is empty!");
      }
+
+    public static List<Income> getIncomeList() {
+        return incomeList;
+    }
 }

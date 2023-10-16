@@ -24,7 +24,7 @@ public class ExpenseStorage {
 
     // Save user specific file.
     public static void saveFile() throws IOException {
-        filename = BudgetTracker.userList.get(BudgetTracker.activeUser).firstName() + "-expenselist.json";
+        filename = BudgetTracker.userList.get(BudgetTracker.activeUser).fileExpense();
         path = "files/" + filename;
         FileWriter write = new FileWriter(path);
         gson.toJson(expenseList, write);
@@ -33,9 +33,9 @@ public class ExpenseStorage {
 
     // Read all users expense files.
     public static void readFile() throws IOException {
-        filename = BudgetTracker.userList.get(BudgetTracker.activeUser).firstName() + "-expenselist.json";
+        filename = BudgetTracker.userList.get(BudgetTracker.activeUser).fileExpense();
         path = "files/" + filename;
-        Type type = new TypeToken<ArrayList<Income>>(){}.getType();
+        Type type = new TypeToken<ArrayList<Expense>>(){}.getType();
         File file = new File(path);
         List<Expense> templist;
         expenseList.clear();
@@ -58,7 +58,7 @@ public class ExpenseStorage {
 
     }
 
-    // Add to income list
+    // Add to expense list
     public static void addExpense() throws IOException {
         System.out.print("Enter name of the expense: ");
         String name = BudgetTracker.input.nextLine();
@@ -79,7 +79,7 @@ public class ExpenseStorage {
             System.out.print("Enter row number for the expense you want to change 0 to cancel: ");
             short rowChoice = OtherMethods.shortNumber();
             BudgetTracker.input.nextLine();
-            if (rowChoice > 0 && rowChoice < expenseList.size()) {
+            if (rowChoice > 0 && rowChoice < (expenseList.size() + 1)) {
                 rowChoice -= 1;
                 while (true) {
                     System.out.println("What do you want to change?");
@@ -134,15 +134,20 @@ public class ExpenseStorage {
     public static void removeExpense() throws IOException {
         if (!expenseList.isEmpty()) {
             listExpense();
-            System.out.print("Enter row number for the income you want to change 0 to cancel: ");
+            System.out.print("Enter row number for the expense you want to remove 0 to cancel: ");
             short rowChoice = OtherMethods.shortNumber();
+            BudgetTracker.input.nextLine();
             if (rowChoice > 0) {
                 rowChoice -= 1;
                 expenseList.remove(rowChoice);
-                System.out.println("Income removed!");
+                System.out.println("Expense removed!");
                 saveFile();
             }
         }
         else System.out.println("List is empty!");
+    }
+
+    public static List<Expense> getExpenseList() {
+        return expenseList;
     }
 }
