@@ -18,10 +18,6 @@ public class ExpenseStorage {
     private static String filename;
     private static String path;
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    public ExpenseStorage() {
-
-    }
-
     // Save user specific file.
     public static void saveFile() throws IOException {
         filename = BudgetTracker.userList.get(BudgetTracker.activeUser).fileExpense();

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 
-// Ställe för att ha extra metoder som jag annars hade kladdat ner main med.
+// Ställe för att ha extra metoder som jag annars antagligen hade kladdat ner main med.
 public class OtherMethods {
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -153,7 +153,7 @@ public class OtherMethods {
         }
         return category;
     }
-
+    // Metod för att lägga till en default user om user listan är tom.
     public static void addDefaultUser() throws IOException {
         if (BudgetTracker.userList.isEmpty()) {
             BudgetTracker.userList.add(new User("default", "user"));
@@ -192,13 +192,19 @@ public class OtherMethods {
 
     // Add user
     public static void addUser() throws IOException {
-        System.out.print("Enter name: ");
+        System.out.print("Enter first name: ");
         String name = BudgetTracker.input.nextLine();
-        System.out.print("Enter lastname: ");
+        System.out.print("Enter last name: ");
         String lastname = BudgetTracker.input.nextLine();
         BudgetTracker.userList.add(new User(name, lastname));
         System.out.println("User created!");
         saveUser();
+        System.out.println("Do you want to change from current user?");
+        System.out.println("yes or ENTER to cancel");
+        String answer = BudgetTracker.input.nextLine();
+        if (answer.equalsIgnoreCase("yes")) {
+            changeUser();
+        }
     }
 
     // Change user
