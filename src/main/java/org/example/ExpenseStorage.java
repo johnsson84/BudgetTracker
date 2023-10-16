@@ -47,8 +47,10 @@ public class ExpenseStorage {
     public static void listExpense() {
         System.out.println("\nEXPENSE LIST");
         if (!expenseList.isEmpty()) {
+            System.out.printf("   |%-15s |%-15s |%-15s |%-15s\n", "NAME", "CATEGORY", "AMOUNT", "DATE");
             for (int i = 0; i < expenseList.size(); i++) {
-                System.out.println((i+1) + ". " + expenseList.get(i));
+                System.out.print((i+1) + ". ");
+                expenseList.get(i).printExpense();
             }
         } else System.out.println("List is empty.");
 
@@ -66,6 +68,11 @@ public class ExpenseStorage {
         expenseList.add(new Expense(name, amount, date, category));
         listExpense();
         saveFile();
+        System.out.print("Do you want to add more? yes or ENTER to cancel: ");
+        String answer = BudgetTracker.input.nextLine();
+        if (answer.equalsIgnoreCase("yes")) {
+            addExpense();
+        }
     }
 
     // Change one value on an item in expense list.
@@ -118,6 +125,11 @@ public class ExpenseStorage {
 
                     else System.out.println("Invalid choice!");
                 }
+                System.out.print("Do you want to update more? yes or ENTER to cancel: ");
+                String answer = BudgetTracker.input.nextLine();
+                if (answer.equalsIgnoreCase("yes")) {
+                    updateExpense();
+                }
             }
             if (rowChoice == 0){}
             else System.out.println("Must be a number on the list!");
@@ -133,17 +145,31 @@ public class ExpenseStorage {
             System.out.print("Enter row number for the expense you want to remove 0 to cancel: ");
             short rowChoice = OtherMethods.shortNumber();
             BudgetTracker.input.nextLine();
-            if (rowChoice > 0) {
+            if (rowChoice > 0 && rowChoice < (expenseList.size() + 1)) {
                 rowChoice -= 1;
                 expenseList.remove(rowChoice);
                 System.out.println("Expense removed!");
                 saveFile();
+                System.out.print("Do you want to remove more? yes or ENTER to cancel: ");
+                String answer = BudgetTracker.input.nextLine();
+                if (answer.equalsIgnoreCase("yes")) {
+                    removeExpense();
+                }
             }
+            else if (rowChoice == 0) {}
+            else System.out.println("Wrong input!");
         }
         else System.out.println("List is empty!");
     }
 
     public static List<Expense> getExpenseList() {
         return expenseList;
+    }
+    public static double totalValue() {
+        double totalValue = 0;
+        for (int i = 0; i < expenseList.size(); i++) {
+            totalValue += expenseList.get(i).amount();
+        }
+        return totalValue;
     }
 }

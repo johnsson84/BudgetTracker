@@ -100,7 +100,7 @@ public class OtherMethods {
                 }
                 BudgetTracker.input.nextLine();
                 // kolla om det stämmer efter manuell inmatning, om inte börja om.
-                System.out.print("Is this correct (" + year + "/" + month + "/" + day + ")? yes or no: ");
+                System.out.print("Is this correct (" + year + "-" + month + "-" + day + ")? yes or no: ");
                 answer = BudgetTracker.input.nextLine();
                 if (answer.equalsIgnoreCase("yes")) {
                     date = year + "/" + month + "/" + day;
@@ -258,6 +258,13 @@ public class OtherMethods {
             }
         }
         else System.out.println("List is empty!");
+    }
+
+    public static void printBudget() {
+        System.out.println("\nBUDGET OVERVIEW");
+        System.out.println("Income total: " + IncomeStorage.totalValue() + "kr.");
+        System.out.println("Expense total: " + ExpenseStorage.totalValue() + "kr.");
+        System.out.println("TOTAL: " + (IncomeStorage.totalValue() - ExpenseStorage.totalValue()) + "kr.");
     }
 }
 

@@ -34,6 +34,7 @@ public class Menu {
                 case "3":
                     IncomeStorage.listIncome();
                     ExpenseStorage.listExpense();
+                    OtherMethods.printBudget();
                     break;
                 case "4":
                     // System.out.println("Not implemented yet");

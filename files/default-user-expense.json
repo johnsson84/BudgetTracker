@@ -1,0 +1,20 @@
+[
+  {
+    "category": "GAS",
+    "name": "Diesel",
+    "amount": 1300.0,
+    "date": "2023-10-16"
+  },
+  {
+    "category": "FOOD",
+    "name": "Pizza",
+    "amount": 140.0,
+    "date": "2023-10-16"
+  },
+  {
+    "category": "OTHER",
+    "name": "Bilköp",
+    "amount": 22000.0,
+    "date": "2023-10-16"
+  }
+]

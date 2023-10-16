@@ -46,8 +46,10 @@ public class IncomeStorage {
     public static void listIncome() {
         System.out.println("\nINCOME LIST");
         if (!incomeList.isEmpty()) {
+            System.out.printf("   |%-15s |%-15s |%-15s |%-15s\n", "NAME", "CATEGORY", "AMOUNT", "DATE");
             for (int i = 0; i < incomeList.size(); i++) {
-                System.out.println((i+1) + ". " + incomeList.get(i));
+                System.out.print((i+1) + ". ");
+                incomeList.get(i).printIncome();
             }
         } else System.out.println("List is empty.");
     }
@@ -64,6 +66,11 @@ public class IncomeStorage {
         incomeList.add(new Income(name, amount, date, category));
         listIncome();
         saveFile();
+        System.out.print("Do you want to add more? yes or ENTER to cancel: ");
+        String answer = BudgetTracker.input.nextLine();
+        if (answer.equalsIgnoreCase("yes")) {
+            addIncome();
+        }
     }
 
     // Change one value on an item in income list.
@@ -116,6 +123,11 @@ public class IncomeStorage {
 
                     else System.out.println("Invalid choice!");
                 }
+                System.out.print("Do you want to update more? yes or ENTER to cancel: ");
+                String answer = BudgetTracker.input.nextLine();
+                if (answer.equalsIgnoreCase("yes")) {
+                    updateIncome();
+                }
             }
             if (rowChoice == 0){}
             else System.out.println("Must be a number on the list!");
@@ -131,17 +143,33 @@ public class IncomeStorage {
             System.out.print("Enter row number for the income you want to remove 0 to cancel: ");
             short rowChoice = OtherMethods.shortNumber();
             BudgetTracker.input.nextLine();
-            if (rowChoice > 0) {
+            if (rowChoice > 0 && rowChoice < (incomeList.size() + 1)) {
                 rowChoice -= 1;
                 incomeList.remove(rowChoice);
                 System.out.println("Income removed!");
                 saveFile();
+                System.out.print("Do you want to remove more? yes or ENTER to cancel: ");
+                String answer = BudgetTracker.input.nextLine();
+                if (answer.equalsIgnoreCase("yes")) {
+                    removeIncome();
+                }
             }
+            else if (rowChoice == 0) {}
+            else System.out.println("Wrong input!");
         }
         else System.out.println("List is empty!");
+
      }
 
     public static List<Income> getIncomeList() {
         return incomeList;
+    }
+
+    public static double totalValue() {
+        double totalValue = 0;
+        for (int i = 0; i < incomeList.size(); i++) {
+            totalValue += incomeList.get(i).amount();
+        }
+        return totalValue;
     }
 }

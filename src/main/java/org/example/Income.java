@@ -22,4 +22,8 @@ public class Income extends Transaction{
     public String toString() {
         return super.toString() + " |Category: " + category;
     }
+
+    public void printIncome() {
+        System.out.printf("|%-15s |%-15s |%-15s |%-15s\n", super.name(), category, super.amount(), super.date());
+    }
 }

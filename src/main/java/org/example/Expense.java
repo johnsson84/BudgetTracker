@@ -21,4 +21,7 @@ public class Expense extends Transaction {
     public EExpenseCategory category() {
         return category;
     }
+    public void printExpense() {
+        System.out.printf("|%-15s |%-15s |%-15s |%-15s\n", super.name(), category, super.amount(), super.date());
+    }
 }

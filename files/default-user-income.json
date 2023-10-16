@@ -1,0 +1,14 @@
+[
+  {
+    "category": "SALARY",
+    "name": "Lön",
+    "amount": 12000.0,
+    "date": "2023-10-16"
+  },
+  {
+    "category": "OTHER",
+    "name": "Swish",
+    "amount": 245.0,
+    "date": "2023-10-16"
+  }
+]
