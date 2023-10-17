@@ -9,11 +9,6 @@ public class Income extends Transaction{
         this.category = category;
     }
 
-
-    public EIncomeCategory category() {
-        return category;
-    }
-
     public void setCategory(EIncomeCategory category) {
         this.category = category;
     }
@@ -24,6 +19,6 @@ public class Income extends Transaction{
     }
 
     public void printIncome() {
-        System.out.printf("|%-15s |%-15s |%-15s |%-15s\n", super.name(), category, super.amount(), super.date());
+        System.out.printf("|%-15s |%-15s |%-15s |%-15s\n", super.getName(), category, super.getAmount(), super.getDate());
     }
 }

@@ -2,7 +2,7 @@ package org.example;
 
 import java.io.IOException;
 
-// A class with all menus.
+// All menus.
 public class Menu {
     private static String menuChoice;
 
@@ -14,7 +14,6 @@ public class Menu {
     private static void mainMenu() throws IOException {
         boolean isRunning = true;
         while (isRunning) {
-            OtherMethods.addDefaultUser();
             System.out.println("\nBUDGET TRACKER");
             System.out.println("User: " + BudgetTracker.userList.get(BudgetTracker.activeUser));
             System.out.println("1. Incomes" +
@@ -37,7 +36,6 @@ public class Menu {
                     OtherMethods.printBudget();
                     break;
                 case "4":
-                    // System.out.println("Not implemented yet");
                     userMenu();
                     break;
                 case "5":

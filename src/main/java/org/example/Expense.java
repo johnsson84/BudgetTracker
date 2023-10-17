@@ -18,10 +18,7 @@ public class Expense extends Transaction {
         return super.toString() + " |Category: " + category;
     }
 
-    public EExpenseCategory category() {
-        return category;
-    }
     public void printExpense() {
-        System.out.printf("|%-15s |%-15s |%-15s |%-15s\n", super.name(), category, super.amount(), super.date());
+        System.out.printf("|%-15s |%-15s |%-15s |%-15s\n", super.getName(), category, super.getAmount(), super.getDate());
     }
 }

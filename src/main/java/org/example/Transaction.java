@@ -5,23 +5,10 @@ public class Transaction {
     private double amount;
     private String date;
 
-
     public Transaction(String name, double amount, String date) {
         this.name = name;
         this.amount = amount;
         this.date = date;
-    }
-
-    public String name() {
-        return name;
-    }
-
-    public double amount() {
-        return amount;
-    }
-
-    public String date() {
-        return date;
     }
 
     public void setName(String name) {
@@ -39,5 +26,17 @@ public class Transaction {
     @Override
     public String toString() {
         return "|Name: " + name + " |Amount: " + amount + "kr |Date: " + date;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public String getDate() {
+        return date;
     }
 }

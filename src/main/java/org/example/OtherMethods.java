@@ -39,13 +39,12 @@ public class OtherMethods {
         return shortNumber;
     }
 
-    //För inkomst och utgifts summor
+    //Metod för inkomst och utgifts summor. Sållar ut bokstäver.
     public static double inputAmount() {
         double sum = 0;
         while (true) {
             try {
                 double number = BudgetTracker.input.nextDouble();
-
                 sum = number;
                 break;
             }
@@ -54,7 +53,6 @@ public class OtherMethods {
                 BudgetTracker.input.nextLine();
             }
         }
-
         return sum;
     }
     // Metod för att returnera ett datum, standard är dagens datum men metoden tillåter mauell inmatning.
@@ -66,7 +64,7 @@ public class OtherMethods {
             String answer = BudgetTracker.input.nextLine();
             if (answer.equalsIgnoreCase("no")) {
                 // Mata in datum manuellt och kolla så man håller sig inom ramarna
-                // för rimliga år, månader och dagar.
+                // för rimlig nutid.
                 String year;
                 String month;
                 String day;
@@ -103,7 +101,7 @@ public class OtherMethods {
                 System.out.print("Is this correct (" + year + "-" + month + "-" + day + ")? yes or no: ");
                 answer = BudgetTracker.input.nextLine();
                 if (answer.equalsIgnoreCase("yes")) {
-                    date = year + "/" + month + "/" + day;
+                    date = year + "-" + month + "-" + day;
                     break;
                 }
                 else System.out.println("Then try again...");
@@ -117,6 +115,7 @@ public class OtherMethods {
     }
     // Metod för att välja kategori för inkomst
     public static EIncomeCategory inIncomeCategory() {
+        // Lista kategorier
         for (EIncomeCategory cat : EIncomeCategory.values()) {
             System.out.println(cat);
         }
@@ -136,6 +135,7 @@ public class OtherMethods {
     }
     // Metod för att välja kategori för utgift
     public static EExpenseCategory inExpenseCategory() {
+        // Lista kategorier
         for (EExpenseCategory cat : EExpenseCategory.values()) {
             System.out.println(cat);
         }
@@ -161,7 +161,7 @@ public class OtherMethods {
         }
     }
 
-    // List users.
+    // Listar användare
     public static void listUsers() {
         System.out.println("\nUSERS");
         for (int i = 0; i < BudgetTracker.userList.size(); i++) {
@@ -170,14 +170,14 @@ public class OtherMethods {
         }
     }
 
-    // Save users
+    // Sparar användare till userlist
     public static void saveUser() throws IOException {
         FileWriter write = new FileWriter("files/userlist.json");
         gson.toJson(BudgetTracker.userList, write);
         write.close();
     }
 
-    // Read in users
+    // Läser in användare från userlist
     public static void readUsers() throws IOException {
 
         Type type = new TypeToken<ArrayList<User>>() {}.getType();
@@ -188,9 +188,10 @@ public class OtherMethods {
             users = gson.fromJson(read, type);
             BudgetTracker.userList.addAll(users);
         }
+        else addDefaultUser();
     }
 
-    // Add user
+    // Lägger till en ny användare
     public static void addUser() throws IOException {
         System.out.print("Enter first name: ");
         String name = BudgetTracker.input.nextLine();
@@ -199,6 +200,7 @@ public class OtherMethods {
         BudgetTracker.userList.add(new User(name, lastname));
         System.out.println("User created!");
         saveUser();
+        // Efter att användare är skapad möjlighet att ändra användare.
         System.out.println("Do you want to change from current user?");
         System.out.println("yes or ENTER to cancel");
         String answer = BudgetTracker.input.nextLine();
@@ -207,7 +209,7 @@ public class OtherMethods {
         }
     }
 
-    // Change user
+    // Byta till en annan användare
     public static void changeUser() throws IOException {
         listUsers();
         while (true) {
@@ -217,7 +219,7 @@ public class OtherMethods {
             if (userNumber > 0 && userNumber < (BudgetTracker.userList.size() + 1)) {
                 userNumber -= 1;
                 BudgetTracker.activeUser = (userNumber);
-                IncomeStorage.readFile();
+                IncomeStorage.readFile(); // Läser in inkomst och utgift listor för användaren man bytt till.
                 ExpenseStorage.readFile();
                 System.out.println("User changed!");
                 break;
@@ -227,6 +229,10 @@ public class OtherMethods {
 
     }
 
+    // Metod för att ta bort en användare. Om en giltig användare väljs från listan sker följande: eventuella filer
+    // på hårddisken tas bort, temporära listor i Income och Expense storage rensas, användaren tas bort från
+    // userlistan, om det var den enda användaren på listan skapas en default user så att userlistan aldrig är tom,
+    // eventuella income och expense json filer läses in.
     public static void removeUser() throws IOException {
         if (!BudgetTracker.userList.isEmpty()) {
             listUsers();
@@ -249,6 +255,9 @@ public class OtherMethods {
                         System.out.println("User removed!");
                         BudgetTracker.activeUser = 0;
                         saveUser();
+                        OtherMethods.addDefaultUser();
+                        IncomeStorage.readFile();
+                        ExpenseStorage.readFile();
                         break;
                     }
                     else if (deleteAnswer.equals("no")) break;
@@ -260,6 +269,8 @@ public class OtherMethods {
         else System.out.println("List is empty!");
     }
 
+    // Metod för att visa den aktuella användarens budget siffror, inkomst, expense och en total där inkomst minus
+    // utgifter visas.
     public static void printBudget() {
         System.out.println("\nBUDGET OVERVIEW");
         System.out.println("Income total: " + IncomeStorage.totalValue() + "kr.");

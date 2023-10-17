@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IncomeStorage {
+
+    // Temporär lista som håller den aktuella användarens värden.
     private static List<Income> incomeList = new ArrayList<>();
 
     private static String filename;
@@ -17,16 +19,18 @@ public class IncomeStorage {
 
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    // Save user specific file.
+    // Spara användarens fil.
     public static void saveFile() throws IOException {
+        // Filnamnet blir ex. "Johan-Johnsson-income.json"
         filename = BudgetTracker.userList.get(BudgetTracker.activeUser).fileIncome();
         path = "files/" + filename;
         FileWriter write = new FileWriter(path);
+        // Temporär incomeList sparas i aktuella userns filnamn.
         gson.toJson(incomeList, write);
         write.close();
     }
 
-    // Read all users income files.
+    // Läs in användarens fil, incomeList töms på värden innan ny info läses in.
     public static void readFile() throws IOException {
         filename = BudgetTracker.userList.get(BudgetTracker.activeUser).fileIncome();
         path = "files/" + filename;
@@ -37,7 +41,6 @@ public class IncomeStorage {
         if (file.exists()) {
             FileReader read = new FileReader(path);
             templist = gson.fromJson(read, type);
-
             incomeList.addAll(templist);
         }
     }
@@ -73,7 +76,7 @@ public class IncomeStorage {
         }
     }
 
-    // Change one value on an item in income list.
+    // Metod för att ända ett värde på en sparad inkomst. Du kan ända namn, summa, datum eller kategori.
     public static void updateIncome() throws IOException {
         if (!incomeList.isEmpty()) {
             listIncome();
@@ -112,7 +115,6 @@ public class IncomeStorage {
                         break;
                     }
                     if (changeThis.equalsIgnoreCase("category")) {
-                        System.out.print("Enter new category: ");
                         EIncomeCategory category = OtherMethods.inIncomeCategory();
                         incomeList.get(rowChoice).setCategory(category);
                         System.out.println("Category changed!");
@@ -133,7 +135,6 @@ public class IncomeStorage {
             else System.out.println("Must be a number on the list!");
         }
         else System.out.println("List is empty!");
-
     }
 
     // Remove an item from list.
@@ -165,10 +166,11 @@ public class IncomeStorage {
         return incomeList;
     }
 
+    // Räkna ihop summan av inkomster.
     public static double totalValue() {
         double totalValue = 0;
         for (int i = 0; i < incomeList.size(); i++) {
-            totalValue += incomeList.get(i).amount();
+            totalValue += incomeList.get(i).getAmount();
         }
         return totalValue;
     }

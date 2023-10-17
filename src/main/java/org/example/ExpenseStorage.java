@@ -13,21 +13,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExpenseStorage {
+    // Temporär lista som håller den aktuella användarens värden.
     private static List<Expense> expenseList = new ArrayList<>();
 
     private static String filename;
     private static String path;
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    // Save user specific file.
+    // Spara användarens fil.
     public static void saveFile() throws IOException {
+        // Filnamnet blir ex. "Johan-Johnsson-expense.json"
         filename = BudgetTracker.userList.get(BudgetTracker.activeUser).fileExpense();
         path = "files/" + filename;
         FileWriter write = new FileWriter(path);
+        // Temporär expenseList sparas i aktuella userns filnamn.
         gson.toJson(expenseList, write);
         write.close();
     }
 
-    // Read all users expense files.
+    // Läs in användarens fil, expenseList töms på värden innan ny info läses in.
     public static void readFile() throws IOException {
         filename = BudgetTracker.userList.get(BudgetTracker.activeUser).fileExpense();
         path = "files/" + filename;
@@ -75,7 +78,7 @@ public class ExpenseStorage {
         }
     }
 
-    // Change one value on an item in expense list.
+    // Metod för att ända ett värde på en sparad utgift. Du kan ända namn, summa, datum eller kategori.
     public static void updateExpense() throws IOException {
         if (!expenseList.isEmpty()) {
             listExpense();
@@ -114,7 +117,6 @@ public class ExpenseStorage {
                         break;
                     }
                     if (changeThis.equalsIgnoreCase("category")) {
-                        System.out.print("Enter new category: ");
                         EExpenseCategory category = OtherMethods.inExpenseCategory();
                         expenseList.get(rowChoice).setCategory(category);
                         System.out.println("Category changed!");
@@ -165,10 +167,11 @@ public class ExpenseStorage {
     public static List<Expense> getExpenseList() {
         return expenseList;
     }
+    // Räkna ihop summan av utgifter.
     public static double totalValue() {
         double totalValue = 0;
         for (int i = 0; i < expenseList.size(); i++) {
-            totalValue += expenseList.get(i).amount();
+            totalValue += expenseList.get(i).getAmount();
         }
         return totalValue;
     }
