@@ -1,0 +1,14 @@
+[
+  {
+    "category": "OTHER",
+    "name": "asd",
+    "amount": 234.0,
+    "date": "2023-05-04"
+  },
+  {
+    "category": "OTHER",
+    "name": "sdf",
+    "amount": 12.0,
+    "date": "2023-06-01"
+  }
+]

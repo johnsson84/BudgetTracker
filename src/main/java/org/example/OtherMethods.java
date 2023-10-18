@@ -82,7 +82,11 @@ public class OtherMethods {
                 while (true) {
                     System.out.print("Enter month: ");
                     short month1 = shortNumber();
-                    if (month1 > 0 && month1 < 13) {
+                    if (month1 > 0 && month1 < 10) {
+                        month = "0" + month1;
+                        break;
+                    }
+                    else if (month1 > 9 && month1 < 13) {
                         month = Short.toString(month1);
                         break;
                     }
@@ -91,7 +95,11 @@ public class OtherMethods {
                 while (true) {
                     System.out.print("Enter day: ");
                     short day1 = shortNumber();
-                    if (day1 > 0 && day1 < 32) {
+                    if (day1 > 0 && day1 < 10) {
+                        day = "0" + day1;
+                        break;
+                    }
+                    else if (day1 > 9 && day1 < 32) {
                         day = Short.toString(day1);
                         break;
                     }
@@ -279,6 +287,8 @@ public class OtherMethods {
         System.out.println("Expense total: " + ExpenseStorage.totalValue() + "kr.");
         System.out.println("TOTAL: " + (IncomeStorage.totalValue() - ExpenseStorage.totalValue()) + "kr.");
     }
+
+    public static void printBudgetMonth
 }
 
 

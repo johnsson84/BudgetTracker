@@ -39,4 +39,7 @@ public class Transaction {
     public String getDate() {
         return date;
     }
+    public String getMonth() {
+        return date.substring(5,7);
+    }
 }
