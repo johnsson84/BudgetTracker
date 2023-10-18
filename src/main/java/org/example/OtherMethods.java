@@ -4,7 +4,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -212,7 +215,7 @@ public class OtherMethods {
         saveUser();
         // Efter att användare är skapad möjlighet att ändra användare.
         System.out.println("Do you want to change from current user?");
-        System.out.print("yes or ENTER to cancel: ");
+        System.out.print("Yes or ENTER to cancel: ");
         String answer = BudgetTracker.input.nextLine();
         if (answer.equalsIgnoreCase("yes")) {
             changeUser();
@@ -288,7 +291,44 @@ public class OtherMethods {
         System.out.println("TOTAL: " + (IncomeStorage.totalValue() - ExpenseStorage.totalValue()) + "kr.");
     }
 
-    public static void printBudgetMonth
+    public static void printBudgetMonth(String month) {
+        System.out.println("\nBUDGET OVERVIEW MONTH");
+        System.out.println("Income total: " + IncomeStorage.totalValueMonth(month) + "kr.");
+        System.out.println("Expense total: " + ExpenseStorage.totalValueMonth(month) + "kr.");
+        System.out.println("TOTAL: " + (IncomeStorage.totalValueMonth(month) - ExpenseStorage.totalValueMonth(month))
+                                        + "kr.");
+    }
+
+    public static String inputMonth() {
+        String month = BudgetTracker.input.nextLine();
+        if (month.equalsIgnoreCase("january") || month.equalsIgnoreCase("jan")) {
+            return "01";
+        } else if (month.equalsIgnoreCase("february") || month.equalsIgnoreCase("feb")) {
+            return "02";
+        } else if (month.equalsIgnoreCase("march") || month.equalsIgnoreCase("mar")) {
+            return "03";
+        } else if (month.equalsIgnoreCase("april") || month.equalsIgnoreCase("apr")) {
+            return "04";
+        } else if (month.equalsIgnoreCase("may")) {
+            return "05";
+        } else if (month.equalsIgnoreCase("june") || month.equalsIgnoreCase("jun")) {
+            return "06";
+        } else if (month.equalsIgnoreCase("july") || month.equalsIgnoreCase("jul")) {
+            return "07";
+        } else if (month.equalsIgnoreCase("august") || month.equalsIgnoreCase("aug")) {
+            return "08";
+        } else if (month.equalsIgnoreCase("september") || month.equalsIgnoreCase("sep")) {
+            return "09";
+        } else if (month.equalsIgnoreCase("october") || month.equalsIgnoreCase("oct")) {
+            return "10";
+        } else if (month.equalsIgnoreCase("november") || month.equalsIgnoreCase("nov")) {
+            return "11";
+        } else if (month.equalsIgnoreCase("december") || month.equalsIgnoreCase("dec")) {
+            return "12";
+        }
+        else System.out.println("Wrong month input!");
+        return null;
+    }
 }
 
 

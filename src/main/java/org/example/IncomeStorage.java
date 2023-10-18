@@ -47,13 +47,27 @@ public class IncomeStorage {
 
     // List items in income list.
     public static void listIncome() {
-        System.out.println("\nINCOME LIST");
+        System.out.println("\nINCOME");
         if (!incomeList.isEmpty()) {
             System.out.printf("   |%-15s |%-15s |%-15s |%-15s\n", "NAME", "CATEGORY", "AMOUNT", "DATE");
             System.out.println("-".repeat(80));
             for (int i = 0; i < incomeList.size(); i++) {
                 System.out.print((i+1) + ". ");
                 incomeList.get(i).printIncome();
+            }
+        } else System.out.println("List is empty.");
+    }
+
+    public static void listIncomeMonth(String month) {
+        System.out.println("\nINCOME " + Month.getMonth(month));
+        if (!incomeList.isEmpty()) {
+            System.out.printf("   |%-15s |%-15s |%-15s |%-15s\n", "NAME", "CATEGORY", "AMOUNT", "MONTH");
+            System.out.println("-".repeat(80));
+            for (int i = 0; i < incomeList.size(); i++) {
+                if (incomeList.get(i).getMonth().equalsIgnoreCase(month)) {
+                    System.out.print((i+1) + ". ");
+                    incomeList.get(i).printIncomeMonth(month);
+                }
             }
         } else System.out.println("List is empty.");
     }
@@ -167,11 +181,21 @@ public class IncomeStorage {
         return incomeList;
     }
 
-    // Räkna ihop summan av inkomster.
+    // Räkna ihop summan av alla inkomster.
     public static double totalValue() {
         double totalValue = 0;
         for (int i = 0; i < incomeList.size(); i++) {
             totalValue += incomeList.get(i).getAmount();
+        }
+        return totalValue;
+    }
+    // Räkna ihop summan av vald månads inkomster.
+    public static double totalValueMonth(String month) {
+        double totalValue = 0;
+        for (int i = 0; i < incomeList.size(); i++) {
+            if (incomeList.get(i).getMonth().equalsIgnoreCase(month)) {
+                totalValue += incomeList.get(i).getAmount();
+            }
         }
         return totalValue;
     }

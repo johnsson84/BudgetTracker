@@ -18,7 +18,7 @@ public class Menu {
             System.out.println("User: " + BudgetTracker.userList.get(BudgetTracker.activeUser));
             System.out.println("1. Incomes" +
                                "\n2. Expenses" +
-                               "\n3. Show budget" +
+                               "\n3. Budget" +
                                "\n4. Users" +
                                "\n5. Quit");
             System.out.print("Enter: ");
@@ -31,9 +31,7 @@ public class Menu {
                     expenseMenu();
                     break;
                 case "3":
-                    IncomeStorage.listIncome();
-                    ExpenseStorage.listExpense();
-                    OtherMethods.printBudget();
+                    budgetMenu();
                     break;
                 case "4":
                     userMenu();
@@ -53,7 +51,8 @@ public class Menu {
         System.out.println("\nINCOME MENU");
         System.out.println("1. Add income" +
                            "\n2. Change income" +
-                           "\n3. Remove income");
+                           "\n3. Remove income" +
+                           "\nPress ENTER for main menu");
         System.out.print("Enter: ");
         menuChoice = BudgetTracker.input.nextLine();
         switch (menuChoice) {
@@ -73,7 +72,8 @@ public class Menu {
         System.out.println("\nEXPENSE MENU");
         System.out.println("1. Add expense" +
                          "\n2. Change expense" +
-                         "\n3. Remove expense");
+                         "\n3. Remove expense" +
+                         "\nPress ENTER for main menu");
         System.out.print("Enter: ");
         menuChoice = BudgetTracker.input.nextLine();
         switch (menuChoice) {
@@ -94,7 +94,8 @@ public class Menu {
         System.out.println("\nUSER MENU");
         System.out.println("1. Add user" +
                          "\n2. Change user" +
-                         "\n3. Remove user");
+                         "\n3. Remove user" +
+                         "\nPress ENTER for main menu");
         System.out.print("Enter: ");
         menuChoice = BudgetTracker.input.nextLine();
         switch (menuChoice) {
@@ -106,6 +107,29 @@ public class Menu {
                 break;
             case "3":
                 OtherMethods.removeUser();
+                break;
+        }
+    }
+
+    private static void budgetMenu() throws IOException {
+        System.out.println("\nBUDGET MENU");
+        System.out.println("1. Total overview" +
+                         "\n2. Monthly overview" +
+                         "\nPress ENTER for main menu");
+        System.out.print("Enter: ");
+        menuChoice = BudgetTracker.input.nextLine();
+        switch (menuChoice) {
+            case "1":
+                IncomeStorage.listIncome();
+                ExpenseStorage.listExpense();
+                OtherMethods.printBudget();
+                break;
+            case "2":
+                System.out.print("Enter a month (ex January or jan): ");
+                String month = OtherMethods.inputMonth();
+                IncomeStorage.listIncomeMonth(month);
+                ExpenseStorage.listExpenseMonth(month);
+                OtherMethods.printBudgetMonth(month);
                 break;
         }
     }
