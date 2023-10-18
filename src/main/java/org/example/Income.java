@@ -22,7 +22,7 @@ public class Income extends Transaction{
         System.out.printf("|%-15s |%-15s |%-15s |%-15s\n", super.getName(), category, super.getAmount(), super.getDate());
     }
 
-    public void printIncomeMonth() {
-        System.out.printf("|%-15s |%-15s |%-15s |%-15s\n", super.getName(), category, super.getAmount(), super.getMonth());
+    public void printIncomeMonth(String month) {
+        System.out.printf("|%-15s |%-15s |%-15s |%-15s\n", super.getName(), category, super.getAmount(), super.getDate());
     }
 }

@@ -48,7 +48,7 @@ public class ExpenseStorage {
 
     // List items in expense list.
     public static void listExpense() {
-        System.out.println("\nEXPENSE LIST");
+        System.out.println("\nEXPENSE");
         if (!expenseList.isEmpty()) {
             System.out.printf("   |%-15s |%-15s |%-15s |%-15s\n", "NAME", "CATEGORY", "AMOUNT", "DATE");
             System.out.println("-".repeat(80));
@@ -57,7 +57,19 @@ public class ExpenseStorage {
                 expenseList.get(i).printExpense();
             }
         } else System.out.println("List is empty.");
-
+    }
+    public static void listExpenseMonth(String month) {
+        System.out.println("\nEXPENSE " + Month.getMonth(month));
+        if (!expenseList.isEmpty()) {
+            System.out.printf("   |%-15s |%-15s |%-15s |%-15s\n", "NAME", "CATEGORY", "AMOUNT", "MONTH");
+            System.out.println("-".repeat(80));
+            for (int i = 0; i < expenseList.size(); i++) {
+                if (expenseList.get(i).getMonth().equalsIgnoreCase(month)) {
+                    System.out.print((i+1) + ". ");
+                    expenseList.get(i).printExpenseMonth(month);
+                }
+            }
+        } else System.out.println("List is empty.");
     }
 
     // Add to expense list
@@ -168,11 +180,21 @@ public class ExpenseStorage {
     public static List<Expense> getExpenseList() {
         return expenseList;
     }
-    // Räkna ihop summan av utgifter.
+    // Räkna ihop summan av alla utgifter.
     public static double totalValue() {
         double totalValue = 0;
         for (int i = 0; i < expenseList.size(); i++) {
             totalValue += expenseList.get(i).getAmount();
+        }
+        return totalValue;
+    }
+    // Räkna ihop summan av vald månads utgifter.
+    public static double totalValueMonth(String month) {
+        double totalValue = 0;
+        for (int i = 0; i < expenseList.size(); i++) {
+            if (expenseList.get(i).getMonth().equalsIgnoreCase(month)) {
+                totalValue += expenseList.get(i).getAmount();
+            }
         }
         return totalValue;
     }
