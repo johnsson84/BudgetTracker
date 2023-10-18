@@ -51,6 +51,7 @@ public class ExpenseStorage {
         System.out.println("\nEXPENSE LIST");
         if (!expenseList.isEmpty()) {
             System.out.printf("   |%-15s |%-15s |%-15s |%-15s\n", "NAME", "CATEGORY", "AMOUNT", "DATE");
+            System.out.println("-".repeat(80));
             for (int i = 0; i < expenseList.size(); i++) {
                 System.out.print((i+1) + ". ");
                 expenseList.get(i).printExpense();
@@ -133,7 +134,7 @@ public class ExpenseStorage {
                     updateExpense();
                 }
             }
-            if (rowChoice == 0){}
+            else if (rowChoice == 0){}
             else System.out.println("Must be a number on the list!");
         }
         else System.out.println("List is empty!");

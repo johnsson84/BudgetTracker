@@ -204,7 +204,7 @@ public class OtherMethods {
         saveUser();
         // Efter att användare är skapad möjlighet att ändra användare.
         System.out.println("Do you want to change from current user?");
-        System.out.println("yes or ENTER to cancel");
+        System.out.print("yes or ENTER to cancel: ");
         String answer = BudgetTracker.input.nextLine();
         if (answer.equalsIgnoreCase("yes")) {
             changeUser();
@@ -247,8 +247,8 @@ public class OtherMethods {
                     System.out.print("Are you sure? This also deletes users files (yes or no): ");
                     String deleteAnswer = BudgetTracker.input.nextLine().toLowerCase();
                     if (deleteAnswer.equals("yes")) {
-                        File incomeFile = new File("files/" + BudgetTracker.userList.get(rowChoice).fileIncome());
-                        File expenseFile = new File("files/" + BudgetTracker.userList.get(rowChoice).fileExpense());
+                        File incomeFile = new File("src/main/files/" + BudgetTracker.userList.get(rowChoice).fileIncome());
+                        File expenseFile = new File("src/main/files/" + BudgetTracker.userList.get(rowChoice).fileExpense());
                         incomeFile.delete();
                         expenseFile.delete();
                         IncomeStorage.getIncomeList().clear();

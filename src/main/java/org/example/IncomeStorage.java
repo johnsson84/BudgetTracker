@@ -50,6 +50,7 @@ public class IncomeStorage {
         System.out.println("\nINCOME LIST");
         if (!incomeList.isEmpty()) {
             System.out.printf("   |%-15s |%-15s |%-15s |%-15s\n", "NAME", "CATEGORY", "AMOUNT", "DATE");
+            System.out.println("-".repeat(80));
             for (int i = 0; i < incomeList.size(); i++) {
                 System.out.print((i+1) + ". ");
                 incomeList.get(i).printIncome();
@@ -131,7 +132,7 @@ public class IncomeStorage {
                     updateIncome();
                 }
             }
-            if (rowChoice == 0){}
+            else if (rowChoice == 0){}
             else System.out.println("Must be a number on the list!");
         }
         else System.out.println("List is empty!");
