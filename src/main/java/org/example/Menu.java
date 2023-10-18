@@ -19,8 +19,9 @@ public class Menu {
             System.out.println("1. Incomes" +
                                "\n2. Expenses" +
                                "\n3. Budget" +
-                               "\n4. Users" +
-                               "\n5. Quit");
+                               "\n4. Search" +
+                               "\n5. Users" +
+                               "\n6. Quit");
             System.out.print("Enter: ");
             menuChoice = BudgetTracker.input.nextLine();
             switch (menuChoice) {
@@ -34,9 +35,12 @@ public class Menu {
                     budgetMenu();
                     break;
                 case "4":
-                    userMenu();
+                    OtherMethods.search();
                     break;
                 case "5":
+                    userMenu();
+                    break;
+                case "6":
                     System.out.println("quitting...");
                     isRunning = false;
                     break;

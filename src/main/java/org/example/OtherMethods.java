@@ -299,6 +299,8 @@ public class OtherMethods {
                                         + "kr.");
     }
 
+    // Metod för att göra om en inmatad månad till ett siffervärde i en sträng, som sen används i andra metoder för att
+    // lista specifik månad i budgetöversynen.
     public static String inputMonth() {
         String month = BudgetTracker.input.nextLine();
         if (month.equalsIgnoreCase("january") || month.equalsIgnoreCase("jan")) {
@@ -328,6 +330,33 @@ public class OtherMethods {
         }
         else System.out.println("Wrong month input!");
         return null;
+    }
+
+    // Simpel sökmetod som jämnför sökning med namnet på en inkomst eller utgift.
+    public static void search() {
+        while (true) {
+            boolean foundAnything = false;
+            System.out.print("\nEnter name for the income or expense you are seeking (ENTER to cancel): ");
+            String search = BudgetTracker.input.nextLine();
+            if (search.equals("")) { break; }
+            System.out.printf("\n   |%-15s |%-15s |%-15s |%-15s\n", "NAME", "CATEGORY", "AMOUNT", "DATE");
+            System.out.println("-".repeat(80));
+            for (int i = 0; i < IncomeStorage.getIncomeList().size(); i++) {
+                if (IncomeStorage.getIncomeList().get(i).getName().equalsIgnoreCase(search)) {
+                    IncomeStorage.getIncomeList().get(i).printIncome();
+                    foundAnything = true;
+                }
+            }
+            for (int i = 0; i < ExpenseStorage.getExpenseList().size(); i++) {
+                if (ExpenseStorage.getExpenseList().get(i).getName().equalsIgnoreCase(search)) {
+                    ExpenseStorage.getExpenseList().get(i).printExpense();
+                    foundAnything = true;
+                }
+            }
+            if (!foundAnything) System.out.println("Search not found!");
+
+        }
+
     }
 }
 
