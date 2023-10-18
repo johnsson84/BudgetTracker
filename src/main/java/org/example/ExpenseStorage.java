@@ -66,7 +66,7 @@ public class ExpenseStorage {
             for (int i = 0; i < expenseList.size(); i++) {
                 if (expenseList.get(i).getMonth().equalsIgnoreCase(month)) {
                     System.out.print((i+1) + ". ");
-                    expenseList.get(i).printExpenseMonth(month);
+                    expenseList.get(i).printExpense();
                 }
             }
         } else System.out.println("List is empty.");

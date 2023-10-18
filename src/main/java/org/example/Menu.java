@@ -123,6 +123,8 @@ public class Menu {
                 IncomeStorage.listIncome();
                 ExpenseStorage.listExpense();
                 OtherMethods.printBudget();
+                System.out.println("Press ENTER to continue...");
+                BudgetTracker.input.nextLine();
                 break;
             case "2":
                 System.out.print("Enter a month (ex January or jan): ");
@@ -130,6 +132,8 @@ public class Menu {
                 IncomeStorage.listIncomeMonth(month);
                 ExpenseStorage.listExpenseMonth(month);
                 OtherMethods.printBudgetMonth(month);
+                System.out.println("Press ENTER to continue...");
+                BudgetTracker.input.nextLine();
                 break;
         }
     }

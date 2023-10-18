@@ -1,10 +1,10 @@
 package org.example;
 
-public class Income extends Transaction{
+public class Income extends Transaction {
 
     private EIncomeCategory category;
 
-    public Income(String name,double amount, String date, EIncomeCategory category) {
+    public Income(String name, double amount, String date, EIncomeCategory category) {
         super(name, amount, date);
         this.category = category;
     }
@@ -19,10 +19,6 @@ public class Income extends Transaction{
     }
 
     public void printIncome() {
-        System.out.printf("|%-15s |%-15s |%-15s |%-15s\n", super.getName(), category, super.getAmount(), super.getDate());
-    }
-
-    public void printIncomeMonth(String month) {
         System.out.printf("|%-15s |%-15s |%-15s |%-15s\n", super.getName(), category, super.getAmount(), super.getDate());
     }
 }

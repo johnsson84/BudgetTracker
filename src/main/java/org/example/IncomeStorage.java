@@ -66,7 +66,7 @@ public class IncomeStorage {
             for (int i = 0; i < incomeList.size(); i++) {
                 if (incomeList.get(i).getMonth().equalsIgnoreCase(month)) {
                     System.out.print((i+1) + ". ");
-                    incomeList.get(i).printIncomeMonth(month);
+                    incomeList.get(i).printIncome();
                 }
             }
         } else System.out.println("List is empty.");
