@@ -23,7 +23,7 @@ public class ExpenseStorage {
     public static void saveFile() throws IOException {
         // Filnamnet blir ex. "Johan-Johnsson-expense.json"
         filename = BudgetTracker.userList.get(BudgetTracker.activeUser).fileExpense();
-        path = "files/" + filename;
+        path = "src/main/files/" + filename;
         FileWriter write = new FileWriter(path);
         // Temporär expenseList sparas i aktuella userns filnamn.
         gson.toJson(expenseList, write);
@@ -33,7 +33,7 @@ public class ExpenseStorage {
     // Läs in användarens fil, expenseList töms på värden innan ny info läses in.
     public static void readFile() throws IOException {
         filename = BudgetTracker.userList.get(BudgetTracker.activeUser).fileExpense();
-        path = "files/" + filename;
+        path = "src/main/files/" + filename;
         Type type = new TypeToken<ArrayList<Expense>>(){}.getType();
         File file = new File(path);
         List<Expense> templist;

@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 
-// Ställe för att ha extra metoder som jag annars antagligen hade kladdat ner main med.
+// Ställe för att ha extra metoder som jag annars antagligen hade kladdat ner main med. Hade nog kunnat delat upp denna
+// filen lite till om man nu hade velat sortera det lite mer. Men jag brukar fälla ihop alla metoder i topp lagret så är
+// det enkelt att navigera bland metoderna.
 public class OtherMethods {
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -172,7 +174,7 @@ public class OtherMethods {
 
     // Sparar användare till userlist
     public static void saveUser() throws IOException {
-        FileWriter write = new FileWriter("files/userlist.json");
+        FileWriter write = new FileWriter("src/main/files/userlist.json");
         gson.toJson(BudgetTracker.userList, write);
         write.close();
     }
@@ -181,7 +183,7 @@ public class OtherMethods {
     public static void readUsers() throws IOException {
 
         Type type = new TypeToken<ArrayList<User>>() {}.getType();
-        File file = new File("files/userlist.json");
+        File file = new File("src/main/files/userlist.json");
         List<User> users;
         if (file.exists()) {
             FileReader read = new FileReader(file);

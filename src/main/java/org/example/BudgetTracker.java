@@ -13,9 +13,10 @@ public class BudgetTracker {
     public static void main(String[] args) throws IOException {
         OtherMethods.readUsers();
         OtherMethods.addDefaultUser();
-        // Reads income and expense files.
+        // Läser in inkomst och utgift filer. I detta fallet läser den in till första usern på listan som är default
+        // user om man inte har tagit bort den och en annan user finns på plats 0.
         IncomeStorage.readFile();
         ExpenseStorage.readFile();
-        Menu menu = new Menu();
+        Menu menu = new Menu(); // Leder till klass med alla menyer
     }
 }
