@@ -25,7 +25,7 @@ public class IncomeStorage {
         filename = BudgetTracker.userList.get(BudgetTracker.activeUser).fileIncome();
         path = "src/main/files/" + filename;
         FileWriter write = new FileWriter(path);
-        // Temporär incomeList sparas i aktuella userns filnamn.
+        // Temporär incomeList sparas i aktuella användarens filnamn.
         gson.toJson(incomeList, write);
         write.close();
     }
@@ -45,7 +45,7 @@ public class IncomeStorage {
         }
     }
 
-    // List items in income list.
+    // Printar ut all inkomst om listan inte är tom.
     public static void listIncome() {
         System.out.println("\nINCOME");
         if (!incomeList.isEmpty()) {
@@ -58,6 +58,7 @@ public class IncomeStorage {
         } else System.out.println("List is empty.");
     }
 
+    // Samma som ovan fast listar efter angiven månad.
     public static void listIncomeMonth(String month) {
         System.out.println("\nINCOME " + Month.getMonth(month));
         if (!incomeList.isEmpty()) {
@@ -72,19 +73,19 @@ public class IncomeStorage {
         } else System.out.println("List is empty.");
     }
 
-    // Add to income list
+    // Lägga till en inkomst.
     public static void addIncome() throws IOException {
         System.out.print("Enter name of the income: ");
         String name = BudgetTracker.input.nextLine();
         System.out.print("Enter amount: ");
         double amount = OtherMethods.inputAmount();
         BudgetTracker.input.nextLine();
-        String date = OtherMethods.inputDate();
-        EIncomeCategory category = OtherMethods.inIncomeCategory();
+        String date = OtherMethods.inputDate(); // Datum metod
+        EIncomeCategory category = OtherMethods.inIncomeCategory(); // Kategori metod
         incomeList.add(new Income(name, amount, date, category));
         listIncome();
         saveFile();
-        System.out.print("Do you want to add more? yes or ENTER to cancel: ");
+        System.out.print("Do you want to add more? Yes or ENTER to cancel: ");
         String answer = BudgetTracker.input.nextLine();
         if (answer.equalsIgnoreCase("yes")) {
             addIncome();
@@ -140,19 +141,19 @@ public class IncomeStorage {
 
                     else System.out.println("Invalid choice!");
                 }
-                System.out.print("Do you want to update more? yes or ENTER to cancel: ");
+                System.out.print("Do you want to update more? Yes or ENTER to cancel: ");
                 String answer = BudgetTracker.input.nextLine();
                 if (answer.equalsIgnoreCase("yes")) {
                     updateIncome();
                 }
             }
-            else if (rowChoice == 0){}
+            else if (rowChoice == 0){} // Ska vara tom body, trycker man 0 för att avbryta så hamnar man här.
             else System.out.println("Must be a number on the list!");
         }
         else System.out.println("List is empty!");
     }
 
-    // Remove an item from list.
+    // Ta bort en inkomst från listan.
     public static void removeIncome() throws IOException {
         if (!incomeList.isEmpty()) {
             listIncome();
@@ -164,13 +165,13 @@ public class IncomeStorage {
                 incomeList.remove(rowChoice);
                 System.out.println("Income removed!");
                 saveFile();
-                System.out.print("Do you want to remove more? yes or ENTER to cancel: ");
+                System.out.print("Do you want to remove more? Yes or ENTER to cancel: ");
                 String answer = BudgetTracker.input.nextLine();
                 if (answer.equalsIgnoreCase("yes")) {
                     removeIncome();
                 }
             }
-            else if (rowChoice == 0) {}
+            else if (rowChoice == 0) {} // Ska vara tom body, trycker man 0 för att avbryta så hamnar man här.
             else System.out.println("Wrong input!");
         }
         else System.out.println("List is empty!");

@@ -25,7 +25,7 @@ public class ExpenseStorage {
         filename = BudgetTracker.userList.get(BudgetTracker.activeUser).fileExpense();
         path = "src/main/files/" + filename;
         FileWriter write = new FileWriter(path);
-        // Temporär expenseList sparas i aktuella userns filnamn.
+        // Temporär expenseList sparas i aktuella användarens filnamn.
         gson.toJson(expenseList, write);
         write.close();
     }
@@ -46,7 +46,7 @@ public class ExpenseStorage {
         }
     }
 
-    // List items in expense list.
+    // Printar ut alla utgifter om listan inte är tom.
     public static void listExpense() {
         System.out.println("\nEXPENSE");
         if (!expenseList.isEmpty()) {
@@ -58,6 +58,7 @@ public class ExpenseStorage {
             }
         } else System.out.println("List is empty.");
     }
+    // Samma som ovan fast listar efter angiven månad.
     public static void listExpenseMonth(String month) {
         System.out.println("\nEXPENSE " + Month.getMonth(month));
         if (!expenseList.isEmpty()) {
@@ -72,19 +73,19 @@ public class ExpenseStorage {
         } else System.out.println("List is empty.");
     }
 
-    // Add to expense list
+    // Lägg till en utgift.
     public static void addExpense() throws IOException {
         System.out.print("Enter name of the expense: ");
         String name = BudgetTracker.input.nextLine();
         System.out.print("Enter amount: ");
         double amount = OtherMethods.inputAmount();
         BudgetTracker.input.nextLine();
-        String date = OtherMethods.inputDate();
-        EExpenseCategory category = OtherMethods.inExpenseCategory();
+        String date = OtherMethods.inputDate(); // Datum metod.
+        EExpenseCategory category = OtherMethods.inExpenseCategory(); // Kategori metod.
         expenseList.add(new Expense(name, amount, date, category));
         listExpense();
         saveFile();
-        System.out.print("Do you want to add more? yes or ENTER to cancel: ");
+        System.out.print("Do you want to add more? Yes or ENTER to cancel: ");
         String answer = BudgetTracker.input.nextLine();
         if (answer.equalsIgnoreCase("yes")) {
             addExpense();
@@ -140,20 +141,20 @@ public class ExpenseStorage {
 
                     else System.out.println("Invalid choice!");
                 }
-                System.out.print("Do you want to update more? yes or ENTER to cancel: ");
+                System.out.print("Do you want to update more? Yes or ENTER to cancel: ");
                 String answer = BudgetTracker.input.nextLine();
                 if (answer.equalsIgnoreCase("yes")) {
                     updateExpense();
                 }
             }
-            else if (rowChoice == 0){}
+            else if (rowChoice == 0){} // Ska vara tom body, trycker man 0 för att avbryta så hamnar man här.
             else System.out.println("Must be a number on the list!");
         }
         else System.out.println("List is empty!");
 
     }
 
-    // Remove an item from list.
+    // Ta bort en utgift från listan.
     public static void removeExpense() throws IOException {
         if (!expenseList.isEmpty()) {
             listExpense();
@@ -165,13 +166,13 @@ public class ExpenseStorage {
                 expenseList.remove(rowChoice);
                 System.out.println("Expense removed!");
                 saveFile();
-                System.out.print("Do you want to remove more? yes or ENTER to cancel: ");
+                System.out.print("Do you want to remove more? Yes or ENTER to cancel: ");
                 String answer = BudgetTracker.input.nextLine();
                 if (answer.equalsIgnoreCase("yes")) {
                     removeExpense();
                 }
             }
-            else if (rowChoice == 0) {}
+            else if (rowChoice == 0) {} // Ska vara tom body, trycker man 0 för att avbryta så hamnar man här.
             else System.out.println("Wrong input!");
         }
         else System.out.println("List is empty!");

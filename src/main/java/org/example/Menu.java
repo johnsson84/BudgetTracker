@@ -16,12 +16,13 @@ public class Menu {
         while (isRunning) {
             System.out.println("\nBUDGET TRACKER");
             System.out.println("User: " + BudgetTracker.userList.get(BudgetTracker.activeUser));
-            System.out.println("1. Incomes" +
-                               "\n2. Expenses" +
-                               "\n3. Budget" +
-                               "\n4. Search" +
-                               "\n5. Users" +
-                               "\n6. Quit");
+            System.out.println("""
+                    1. Incomes
+                    2. Expenses
+                    3. Budget
+                    4. Search
+                    5. Users
+                    6. Quit""");
             System.out.print("Enter: ");
             menuChoice = BudgetTracker.input.nextLine();
             switch (menuChoice) {
@@ -53,10 +54,11 @@ public class Menu {
     private static void incomeMenu() throws IOException {
         // Add list income method
         System.out.println("\nINCOME MENU");
-        System.out.println("1. Add income" +
-                           "\n2. Change income" +
-                           "\n3. Remove income" +
-                           "\nPress ENTER for main menu");
+        System.out.println("""
+                1. Add income
+                2. Change income
+                3. Remove income
+                Press ENTER for main menu""");
         System.out.print("Enter: ");
         menuChoice = BudgetTracker.input.nextLine();
         switch (menuChoice) {
@@ -74,10 +76,11 @@ public class Menu {
     // Expense menu.
     private static void expenseMenu() throws IOException {
         System.out.println("\nEXPENSE MENU");
-        System.out.println("1. Add expense" +
-                         "\n2. Change expense" +
-                         "\n3. Remove expense" +
-                         "\nPress ENTER for main menu");
+        System.out.println("""
+                1. Add expense
+                2. Change expense
+                3. Remove expense
+                Press ENTER for main menu""");
         System.out.print("Enter: ");
         menuChoice = BudgetTracker.input.nextLine();
         switch (menuChoice) {
@@ -96,10 +99,11 @@ public class Menu {
     // User menu.
     private static void userMenu() throws IOException {
         System.out.println("\nUSER MENU");
-        System.out.println("1. Add user" +
-                         "\n2. Change user" +
-                         "\n3. Remove user" +
-                         "\nPress ENTER for main menu");
+        System.out.println("""
+                1. Add user
+                2. Change user
+                3. Remove user
+                Press ENTER for main menu""");
         System.out.print("Enter: ");
         menuChoice = BudgetTracker.input.nextLine();
         switch (menuChoice) {
@@ -115,11 +119,12 @@ public class Menu {
         }
     }
 
-    private static void budgetMenu() throws IOException {
+    private static void budgetMenu() {
         System.out.println("\nBUDGET MENU");
-        System.out.println("1. Total overview" +
-                         "\n2. Monthly overview" +
-                         "\nPress ENTER for main menu");
+        System.out.println("""
+                1. Total overview
+                2. Monthly overview
+                Press ENTER for main menu""");
         System.out.print("Enter: ");
         menuChoice = BudgetTracker.input.nextLine();
         switch (menuChoice) {

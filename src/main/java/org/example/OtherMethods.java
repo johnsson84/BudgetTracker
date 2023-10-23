@@ -14,9 +14,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 
-// Ställe för att ha extra metoder som jag annars antagligen hade kladdat ner main med. Hade nog kunnat delat upp denna
-// filen lite till om man nu hade velat sortera det lite mer. Men jag brukar fälla ihop alla metoder i topp lagret så är
-// det enkelt att navigera bland metoderna.
+// Ställe för att ha extra metoder som jag annars antagligen hade kladdat ner main med.
 public class OtherMethods {
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -61,26 +59,27 @@ public class OtherMethods {
         return sum;
     }
     // Metod för att returnera ett datum, standard är dagens datum men metoden tillåter mauell inmatning.
+    // Fick läsa lite på nätet om LocalDate.
     public static String inputDate() {
-        LocalDate todaysDate = LocalDate.now();
-        String date = todaysDate.toString(); // ställ in dagens datum
+        LocalDate todaysDate = LocalDate.now(); // Skapa dagens datum
+        String date = todaysDate.toString();
         while (true) {
-            System.out.print("Is this correct date (" + date + ") yes or no: ");
+            System.out.print("Todays date? (" + date + ") yes or no: ");
             String answer = BudgetTracker.input.nextLine();
             if (answer.equalsIgnoreCase("no")) {
                 // Mata in datum manuellt och kolla så man håller sig inom ramarna
-                // för rimlig nutid.
+                // för rimlig nutid som är vad jag har valt.
                 String year;
                 String month;
                 String day;
                 while (true) {
                     System.out.print("Enter year: ");
                     short year1 = shortNumber();
-                    if (year1 > 2015 && year1 < 2050) {
+                    if (year1 > 2015 && year1 < 2051) {
                         year = Short.toString(year1);
                         break;
                     }
-                    else System.out.println("Must be between 2015-2050");
+                    else System.out.println("Must be between 2016-2050");
                 }
                 while (true) {
                     System.out.print("Enter month: ");
@@ -109,7 +108,7 @@ public class OtherMethods {
                     else System.out.println("Must be between 1-31");
 
                 }
-                BudgetTracker.input.nextLine();
+                BudgetTracker.input.nextLine(); // Scanner rensning.
                 // kolla om det stämmer efter manuell inmatning, om inte börja om.
                 System.out.print("Is this correct (" + year + "-" + month + "-" + day + ")? yes or no: ");
                 answer = BudgetTracker.input.nextLine();
@@ -137,6 +136,7 @@ public class OtherMethods {
             try {
                 System.out.print("Enter category from the list: ");
                 String catInput = BudgetTracker.input.nextLine();
+                // Jämför den inmatade strängen i Enum klassen som i sin tur returnerar en kategori som en sträng.
                 category = EIncomeCategory.valueOf(catInput.toUpperCase());
                 break;
             }
@@ -157,6 +157,7 @@ public class OtherMethods {
             try {
                 System.out.print("Enter category from the list: ");
                 String catInput = BudgetTracker.input.nextLine();
+                // Jämför den inmatade strängen i Enum klassen som i sin tur returnerar en kategori som en sträng.
                 category = EExpenseCategory.valueOf(catInput.toUpperCase());
                 break;
             }
@@ -174,7 +175,7 @@ public class OtherMethods {
         }
     }
 
-    // Listar användare
+    // Listar alla användare
     public static void listUsers() {
         System.out.println("\nUSERS");
         for (int i = 0; i < BudgetTracker.userList.size(); i++) {
@@ -183,14 +184,14 @@ public class OtherMethods {
         }
     }
 
-    // Sparar användare till userlist
+    // Sparar användare till user list
     public static void saveUser() throws IOException {
         FileWriter write = new FileWriter("src/main/files/userlist.json");
         gson.toJson(BudgetTracker.userList, write);
         write.close();
     }
 
-    // Läser in användare från userlist
+    // Läser in användare från user list
     public static void readUsers() throws IOException {
 
         Type type = new TypeToken<ArrayList<User>>() {}.getType();
@@ -244,15 +245,15 @@ public class OtherMethods {
 
     // Metod för att ta bort en användare. Om en giltig användare väljs från listan sker följande: eventuella filer
     // på hårddisken tas bort, temporära listor i Income och Expense storage rensas, användaren tas bort från
-    // userlistan, om det var den enda användaren på listan skapas en default user så att userlistan aldrig är tom,
+    // user listan, om det var den enda användaren på listan skapas en default user så att user listan aldrig är tom,
     // eventuella income och expense json filer läses in.
     public static void removeUser() throws IOException {
         if (!BudgetTracker.userList.isEmpty()) {
             listUsers();
-            System.out.print("Enter row number for the income you want to change 0 to cancel: ");
+            System.out.print("Enter row number for the user you want to remove (0 to cancel): ");
             short rowChoice = OtherMethods.shortNumber();
             BudgetTracker.input.nextLine();
-            if (rowChoice > 0) {
+            if (rowChoice > 0 && rowChoice < (BudgetTracker.userList.size() + 1)) {
                 rowChoice -= 1;
                 while (true) {
                     System.out.print("Are you sure? This also deletes users files (yes or no): ");
@@ -291,6 +292,7 @@ public class OtherMethods {
         System.out.println("TOTAL: " + (IncomeStorage.totalValue() - ExpenseStorage.totalValue()) + "kr.");
     }
 
+    // Samma som ovan fast för vald månad.
     public static void printBudgetMonth(String month) {
         System.out.println("\nBUDGET OVERVIEW MONTH");
         System.out.println("Income total: " + IncomeStorage.totalValueMonth(month) + "kr.");
@@ -299,40 +301,43 @@ public class OtherMethods {
                                         + "kr.");
     }
 
-    // Metod för att göra om en inmatad månad till ett siffervärde i en sträng, som sen används i andra metoder för att
+    // Metod för att göra om en inmatad månad till ett siffervärde i en sträng, som sen används för att
     // lista specifik månad i budgetöversynen.
     public static String inputMonth() {
-        String month = BudgetTracker.input.nextLine();
-        if (month.equalsIgnoreCase("january") || month.equalsIgnoreCase("jan")) {
-            return "01";
-        } else if (month.equalsIgnoreCase("february") || month.equalsIgnoreCase("feb")) {
-            return "02";
-        } else if (month.equalsIgnoreCase("march") || month.equalsIgnoreCase("mar")) {
-            return "03";
-        } else if (month.equalsIgnoreCase("april") || month.equalsIgnoreCase("apr")) {
-            return "04";
-        } else if (month.equalsIgnoreCase("may")) {
-            return "05";
-        } else if (month.equalsIgnoreCase("june") || month.equalsIgnoreCase("jun")) {
-            return "06";
-        } else if (month.equalsIgnoreCase("july") || month.equalsIgnoreCase("jul")) {
-            return "07";
-        } else if (month.equalsIgnoreCase("august") || month.equalsIgnoreCase("aug")) {
-            return "08";
-        } else if (month.equalsIgnoreCase("september") || month.equalsIgnoreCase("sep")) {
-            return "09";
-        } else if (month.equalsIgnoreCase("october") || month.equalsIgnoreCase("oct")) {
-            return "10";
-        } else if (month.equalsIgnoreCase("november") || month.equalsIgnoreCase("nov")) {
-            return "11";
-        } else if (month.equalsIgnoreCase("december") || month.equalsIgnoreCase("dec")) {
-            return "12";
+        String m = "";
+        while (true) {
+            String month = BudgetTracker.input.nextLine();
+            if (month.equalsIgnoreCase("january") || month.equalsIgnoreCase("jan")) {
+                m = "01"; break;
+            } else if (month.equalsIgnoreCase("february") || month.equalsIgnoreCase("feb")) {
+                m = "02"; break;
+            } else if (month.equalsIgnoreCase("march") || month.equalsIgnoreCase("mar")) {
+                m = "03"; break;
+            } else if (month.equalsIgnoreCase("april") || month.equalsIgnoreCase("apr")) {
+                m = "04"; break;
+            } else if (month.equalsIgnoreCase("may")) {
+                m = "05"; break;
+            } else if (month.equalsIgnoreCase("june") || month.equalsIgnoreCase("jun")) {
+                m = "06"; break;
+            } else if (month.equalsIgnoreCase("july") || month.equalsIgnoreCase("jul")) {
+                m = "07"; break;
+            } else if (month.equalsIgnoreCase("august") || month.equalsIgnoreCase("aug")) {
+                m = "08"; break;
+            } else if (month.equalsIgnoreCase("september") || month.equalsIgnoreCase("sep")) {
+                m = "09"; break;
+            } else if (month.equalsIgnoreCase("october") || month.equalsIgnoreCase("oct")) {
+                m = "10"; break;
+            } else if (month.equalsIgnoreCase("november") || month.equalsIgnoreCase("nov")) {
+                m = "11"; break;
+            } else if (month.equalsIgnoreCase("december") || month.equalsIgnoreCase("dec")) {
+                m = "12"; break;
+            }
+            else System.out.println("Wrong month input! Try again...");
         }
-        else System.out.println("Wrong month input!");
-        return null;
+        return m;
     }
 
-    // Simpel sökmetod som jämnför sökning med namnet på en inkomst eller utgift.
+    // Simpel sökmetod som jämför sökning med namnet på en inkomst eller utgift.
     public static void search() {
         while (true) {
             boolean foundAnything = false;

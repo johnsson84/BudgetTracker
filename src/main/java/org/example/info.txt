@@ -1,9 +1,9 @@
-Enums
+Enums.
 Tyckte det var svårt med dessa enums av någon anledning men fick använda mig av ditt exempel med toppings som vi
 hade. Den här toString metoden i enum klasserna används till mina inIncomeCategory() och inExpenseCategory() i
-OtherMethods.java för att se den inmatade strängen stämmer överens med någon utan kategorierna som finns i enumen.
+OtherMethods.java för att se den inmatade strängen stämmer överens med någon utav kategorierna som finns i enumen.
 
-User menyn
+User menyn.
 Jag vet att det inte var tvunget till att välja användare men jag tyckte det var rimligt med den funktionen då vi har
 en user klass annars är ju den rätt meningslös kände jag så därför har jag tagit med det.
 Det gick dock inte helt smärtfritt och jag var nära på att skrota den iden för att från början så hade jag en userlist
@@ -13,5 +13,10 @@ till user listan så gick ju det bra men där kom även listorna i user klassen 
 två olika ställen så det blev krock liksom.
 Så innan jag gav upp så kom jag på att jag kan ta bort listorna från user klassen, ha en lista i IncomeStorage och
 ExpenseStorage som temporära listor som används och håller värden för den aktuellt valda users, så byter man användare
-så rensas dessa listor och nya värden från filer som tillhör en user läses in och då började saker att funka.
+så rensas dessa listor och nya värden från filer som tillhör en user läses in och då funka det bättre.
 Sen blev detta en liten extra utmaning för min egen del vilket jag inte hade nått emot.
+
+Övrigt.
+Jag har testat programmet väldigt mycket så jag tror jag har fått med dem flesta tänkbara fel. Jag har kommenterat en
+del i koden där jag tycker det känns rimligt men jag tror att koden är hyfsat lättläst men jag vet att läsa någons
+annan kod är mycket svårare än sin egen. Men säg gärna till om det är något som är obegripligt.
