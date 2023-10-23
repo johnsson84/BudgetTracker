@@ -13,13 +13,7 @@ public class Income extends Transaction {
         this.category = category;
     }
 
-    @Override
-    public String toString() {
-        return super.toString() + " |Category: " + category;
-    }
-
     public void printIncome() {
-        System.out.printf("|%-15s |%-15s |%-15s |%-15s\n", super.getName(), category, super.getAmount(), super.getDate());
+        System.out.printf("|%-15s |%-15s |%-15s |%-15s\n", super.getName(), category, super.getAmount() + "kr", super.getDate());
     }
-
 }

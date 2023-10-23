@@ -23,11 +23,6 @@ public class Transaction {
         this.date = date;
     }
 
-    @Override
-    public String toString() {
-        return "|Name: " + name + " |Amount: " + amount + "kr |Date: " + date;
-    }
-
     public String getName() {
         return name;
     }
