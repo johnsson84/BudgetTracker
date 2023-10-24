@@ -53,7 +53,7 @@ public class IncomeStorage {
             System.out.println("-".repeat(80));
             for (int i = 0; i < incomeList.size(); i++) {
                 System.out.print((i+1) + ". ");
-                incomeList.get(i).printIncome();
+                incomeList.get(i).printTransaction();
             }
         } else System.out.println("List is empty.");
     }
@@ -67,7 +67,7 @@ public class IncomeStorage {
             for (int i = 0; i < incomeList.size(); i++) {
                 if (incomeList.get(i).getMonth().equalsIgnoreCase(month)) {
                     System.out.print((i+1) + ". ");
-                    incomeList.get(i).printIncome();
+                    incomeList.get(i).printTransaction();
                 }
             }
         } else System.out.println("List is empty.");

@@ -348,13 +348,13 @@ public class OtherMethods {
             System.out.println("-".repeat(80));
             for (int i = 0; i < IncomeStorage.getIncomeList().size(); i++) {
                 if (IncomeStorage.getIncomeList().get(i).getName().equalsIgnoreCase(search)) {
-                    IncomeStorage.getIncomeList().get(i).printIncome();
+                    IncomeStorage.getIncomeList().get(i).printTransaction();
                     foundAnything = true;
                 }
             }
             for (int i = 0; i < ExpenseStorage.getExpenseList().size(); i++) {
                 if (ExpenseStorage.getExpenseList().get(i).getName().equalsIgnoreCase(search)) {
-                    ExpenseStorage.getExpenseList().get(i).printExpense();
+                    ExpenseStorage.getExpenseList().get(i).printTransaction();
                     foundAnything = true;
                 }
             }

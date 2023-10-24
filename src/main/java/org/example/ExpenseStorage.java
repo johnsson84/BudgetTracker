@@ -41,7 +41,6 @@ public class ExpenseStorage {
         if (file.exists()) {
             FileReader read = new FileReader(path);
             templist = gson.fromJson(read, type);
-
             expenseList.addAll(templist);
         }
     }
@@ -54,7 +53,7 @@ public class ExpenseStorage {
             System.out.println("-".repeat(80));
             for (int i = 0; i < expenseList.size(); i++) {
                 System.out.print((i+1) + ". ");
-                expenseList.get(i).printExpense();
+                expenseList.get(i).printTransaction();
             }
         } else System.out.println("List is empty.");
     }
@@ -67,7 +66,7 @@ public class ExpenseStorage {
             for (int i = 0; i < expenseList.size(); i++) {
                 if (expenseList.get(i).getMonth().equalsIgnoreCase(month)) {
                     System.out.print((i+1) + ". ");
-                    expenseList.get(i).printExpense();
+                    expenseList.get(i).printTransaction();
                 }
             }
         } else System.out.println("List is empty.");
