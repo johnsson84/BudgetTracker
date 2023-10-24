@@ -37,6 +37,9 @@ public class Transaction {
     public String getMonth() {
         return date.substring(5,7);
     }
+    public String getYear() {
+        return date.substring(0,4);
+    }
     public void printTransaction() {
         System.out.printf("|%-15s |%-15s |%-15s\n", name, amount + " kr", date);
     }

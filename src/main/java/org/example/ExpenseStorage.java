@@ -58,14 +58,14 @@ public class ExpenseStorage {
         } else System.out.println("List is empty.");
     }
     // Samma som ovan fast listar efter angiven månad.
-    public static void listExpenseMonth(String month) {
-        System.out.println("\nEXPENSE " + Month.getMonth(month));
+    public static void listExpenseMonth(String month, String year) {
+        System.out.println("\nEXPENSE " + Month.getMonth(month) + " " + year);
         if (!expenseList.isEmpty()) {
             System.out.printf("   |%-15s |%-15s |%-15s |%-15s\n", "NAME", "CATEGORY", "AMOUNT", "MONTH");
             System.out.println("-".repeat(80));
             for (int i = 0; i < expenseList.size(); i++) {
-                if (expenseList.get(i).getMonth().equalsIgnoreCase(month)) {
-                    System.out.print((i+1) + ". ");
+                if (expenseList.get(i).getMonth().equalsIgnoreCase(month) && expenseList.get(i).getYear().equals(year)) {
+                    System.out.print("   ");
                     expenseList.get(i).printTransaction();
                 }
             }
@@ -189,10 +189,10 @@ public class ExpenseStorage {
         return totalValue;
     }
     // Räkna ihop summan av vald månads utgifter.
-    public static double totalValueMonth(String month) {
+    public static double totalValueMonth(String month, String year) {
         double totalValue = 0;
         for (int i = 0; i < expenseList.size(); i++) {
-            if (expenseList.get(i).getMonth().equalsIgnoreCase(month)) {
+            if (expenseList.get(i).getMonth().equalsIgnoreCase(month) && expenseList.get(i).getYear().equals(year)) {
                 totalValue += expenseList.get(i).getAmount();
             }
         }
