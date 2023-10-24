@@ -293,11 +293,11 @@ public class OtherMethods {
     }
 
     // Samma som ovan fast för vald månad.
-    public static void printBudgetMonth(String month) {
+    public static void printBudgetMonth(String month, String year) {
         System.out.println("\nBUDGET OVERVIEW MONTH");
-        System.out.println("Income total: " + IncomeStorage.totalValueMonth(month) + " kr");
-        System.out.println("Expense total: " + ExpenseStorage.totalValueMonth(month) + " kr");
-        System.out.println("TOTAL: " + (IncomeStorage.totalValueMonth(month) - ExpenseStorage.totalValueMonth(month))
+        System.out.println("Income total: " + IncomeStorage.totalValueMonth(month, year) + " kr");
+        System.out.println("Expense total: " + ExpenseStorage.totalValueMonth(month, year) + " kr");
+        System.out.println("TOTAL: " + (IncomeStorage.totalValueMonth(month, year) - ExpenseStorage.totalValueMonth(month, year))
                                         + " kr");
     }
 

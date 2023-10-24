@@ -59,14 +59,14 @@ public class IncomeStorage {
     }
 
     // Samma som ovan fast listar efter angiven månad.
-    public static void listIncomeMonth(String month) {
-        System.out.println("\nINCOME " + Month.getMonth(month));
+    public static void listIncomeMonth(String month, String year) {
+        System.out.println("\nINCOME " + Month.getMonth(month) + " " + year);
         if (!incomeList.isEmpty()) {
             System.out.printf("   |%-15s |%-15s |%-15s |%-15s\n", "NAME", "CATEGORY", "AMOUNT", "MONTH");
             System.out.println("-".repeat(80));
             for (int i = 0; i < incomeList.size(); i++) {
-                if (incomeList.get(i).getMonth().equalsIgnoreCase(month)) {
-                    System.out.print((i+1) + ". ");
+                if (incomeList.get(i).getMonth().equalsIgnoreCase(month) && incomeList.get(i).getYear().equals(year)) {
+                    System.out.print("   ");
                     incomeList.get(i).printTransaction();
                 }
             }
@@ -191,10 +191,10 @@ public class IncomeStorage {
         return totalValue;
     }
     // Räkna ihop summan av vald månads inkomster.
-    public static double totalValueMonth(String month) {
+    public static double totalValueMonth(String month, String year) {
         double totalValue = 0;
         for (int i = 0; i < incomeList.size(); i++) {
-            if (incomeList.get(i).getMonth().equalsIgnoreCase(month)) {
+            if (incomeList.get(i).getMonth().equalsIgnoreCase(month) && incomeList.get(i).getYear().equals(year)) {
                 totalValue += incomeList.get(i).getAmount();
             }
         }
