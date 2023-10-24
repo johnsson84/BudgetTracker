@@ -287,18 +287,18 @@ public class OtherMethods {
     // utgifter visas.
     public static void printBudget() {
         System.out.println("\nBUDGET OVERVIEW");
-        System.out.println("Income total: " + IncomeStorage.totalValue() + "kr.");
-        System.out.println("Expense total: " + ExpenseStorage.totalValue() + "kr.");
-        System.out.println("TOTAL: " + (IncomeStorage.totalValue() - ExpenseStorage.totalValue()) + "kr.");
+        System.out.println("Income total: " + IncomeStorage.totalValue() + " kr");
+        System.out.println("Expense total: " + ExpenseStorage.totalValue() + " kr");
+        System.out.println("TOTAL: " + (IncomeStorage.totalValue() - ExpenseStorage.totalValue()) + " kr");
     }
 
     // Samma som ovan fast för vald månad.
     public static void printBudgetMonth(String month) {
         System.out.println("\nBUDGET OVERVIEW MONTH");
-        System.out.println("Income total: " + IncomeStorage.totalValueMonth(month) + "kr.");
-        System.out.println("Expense total: " + ExpenseStorage.totalValueMonth(month) + "kr.");
+        System.out.println("Income total: " + IncomeStorage.totalValueMonth(month) + " kr");
+        System.out.println("Expense total: " + ExpenseStorage.totalValueMonth(month) + " kr");
         System.out.println("TOTAL: " + (IncomeStorage.totalValueMonth(month) - ExpenseStorage.totalValueMonth(month))
-                                        + "kr.");
+                                        + " kr");
     }
 
     // Metod för att göra om en inmatad månad till ett siffervärde i en sträng, som sen används för att

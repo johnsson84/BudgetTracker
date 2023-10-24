@@ -14,6 +14,6 @@ public class Income extends Transaction {
     }
 
     public void printIncome() {
-        System.out.printf("|%-15s |%-15s |%-15s |%-15s\n", super.getName(), category, super.getAmount() + "kr", super.getDate());
+        System.out.printf("|%-15s |%-15s |%-15s |%-15s\n", super.getName(), category, super.getAmount() + " kr", super.getDate());
     }
 }
