@@ -4,7 +4,6 @@ public enum Month {
     JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER;
 
     public static Month getMonth(String monthNumber) {
-        Month month;
         switch (monthNumber) {
             case "01": return JANUARY;
             case "02": return FEBRUARY;
@@ -22,5 +21,3 @@ public enum Month {
         return null;
     }
 }
-
-

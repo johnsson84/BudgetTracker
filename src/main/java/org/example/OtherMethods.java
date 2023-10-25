@@ -31,10 +31,10 @@ public class OtherMethods {
                     break;
                 }
                 else
-                    System.out.println("Cant be negative, try again...");
+                    System.out.println("Cant be negative, try again: ");
             }
             catch (InputMismatchException e) {
-                System.out.println("Cant be letters, try again...");
+                System.out.print("Cant be letters or more than 32767, try again: ");
                 BudgetTracker.input.nextLine();
             }
         }
@@ -42,14 +42,18 @@ public class OtherMethods {
         return shortNumber;
     }
 
-    //Metod för inkomst och utgifts summor. Sållar ut bokstäver.
+    // Samma som ovan fast för summor.
     public static double inputAmount() {
         double sum = 0;
         while (true) {
             try {
                 double number = BudgetTracker.input.nextDouble();
-                sum = number;
-                break;
+                if (number >= 0) {
+                    sum = number;
+                    break;
+                }
+                else
+                    System.out.println("Cant be negative, try again...");
             }
             catch (InputMismatchException e) {
                 System.out.println("Cant be letters, try again...");
@@ -58,6 +62,7 @@ public class OtherMethods {
         }
         return sum;
     }
+
     // Metod för att returnera ett datum, standard är dagens datum men metoden tillåter mauell inmatning.
     // Fick läsa lite på nätet om LocalDate.
     public static String inputDate() {
@@ -79,7 +84,10 @@ public class OtherMethods {
                         year = Short.toString(year1);
                         break;
                     }
-                    else System.out.println("Must be between 2016-2050");
+                    else if (year1 > 9999) {
+                        System.out.println("Enter 4 digits for a year, try again...");
+                    }
+                    else System.out.println("Must be between 2016-2050. Try again...");
                 }
                 while (true) {
                     System.out.print("Enter month: ");
@@ -110,7 +118,7 @@ public class OtherMethods {
                 }
                 BudgetTracker.input.nextLine(); // Scanner rensning.
                 // kolla om det stämmer efter manuell inmatning, om inte börja om.
-                System.out.print("Is this correct (" + year + "-" + month + "-" + day + ")? yes or no: ");
+                System.out.print("Is this correct (" + year + "-" + month + "-" + day + ")? yes? ");
                 answer = BudgetTracker.input.nextLine();
                 if (answer.equalsIgnoreCase("yes")) {
                     date = year + "-" + month + "-" + day;
@@ -125,6 +133,7 @@ public class OtherMethods {
         }
         return date;
     }
+
     // Metod för att välja kategori för inkomst
     public static EIncomeCategory inIncomeCategory() {
         // Lista kategorier
@@ -146,6 +155,7 @@ public class OtherMethods {
         }
         return category;
     }
+
     // Metod för att välja kategori för utgift
     public static EExpenseCategory inExpenseCategory() {
         // Lista kategorier
@@ -167,6 +177,7 @@ public class OtherMethods {
         }
         return category;
     }
+
     // Metod för att lägga till en default user om user listan är tom.
     public static void addDefaultUser() throws IOException {
         if (BudgetTracker.userList.isEmpty()) {
@@ -193,7 +204,6 @@ public class OtherMethods {
 
     // Läser in användare från user list
     public static void readUsers() throws IOException {
-
         Type type = new TypeToken<ArrayList<User>>() {}.getType();
         File file = new File("src/main/files/userlist.json");
         List<User> users;
@@ -292,7 +302,7 @@ public class OtherMethods {
         System.out.println("TOTAL: " + (IncomeStorage.totalValue() - ExpenseStorage.totalValue()) + " kr");
     }
 
-    // Samma som ovan fast för vald månad.
+    // Samma som ovan fast för vald månad och år.
     public static void printBudgetMonth(String month, String year) {
         System.out.println("\nBUDGET OVERVIEW MONTH");
         System.out.println("Income total: " + IncomeStorage.totalValueMonth(month, year) + " kr");
@@ -332,7 +342,7 @@ public class OtherMethods {
             } else if (month.equalsIgnoreCase("december") || month.equalsIgnoreCase("dec")) {
                 m = "12"; break;
             }
-            else System.out.println("Wrong month input! Try again...");
+            else System.out.print("Wrong month input! Try again: ");
         }
         return m;
     }
@@ -362,6 +372,24 @@ public class OtherMethods {
 
         }
 
+    }
+
+    // Metod för att välja år när man ska se budget översyn per månad.
+    public static String getValidYear() {
+        String year;
+        while (true) {
+            short year1 = shortNumber();
+            if (year1 > 2015 && year1 < 2051) {
+                year = Short.toString(year1);
+                break;
+            }
+            else if (year1 > 9999) {
+                System.out.print("Enter 4 digits for a year, try again: ");
+            }
+            else System.out.print("Must be between 2016-2050: ");
+        }
+        BudgetTracker.input.nextLine();
+        return year;
     }
 }
 

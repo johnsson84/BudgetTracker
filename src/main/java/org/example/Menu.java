@@ -139,7 +139,7 @@ public class Menu {
                 System.out.print("Enter a month (ex January or jan): ");
                 String month = OtherMethods.inputMonth();
                 System.out.print("Enter year: ");
-                String year = BudgetTracker.input.nextLine();
+                String year = OtherMethods.getValidYear();
                 IncomeStorage.listIncomeMonth(month, year);
                 ExpenseStorage.listExpenseMonth(month, year);
                 OtherMethods.printBudgetMonth(month, year);

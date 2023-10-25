@@ -30,7 +30,7 @@ public class ExpenseStorage {
         write.close();
     }
 
-    // Läs in användarens fil, expenseList töms på värden innan ny info läses in.
+    // Läs in användarens fil, expenseList töms på värden innan ny info läses in, om filen finns.
     public static void readFile() throws IOException {
         filename = BudgetTracker.userList.get(BudgetTracker.activeUser).fileExpense();
         path = "src/main/files/" + filename;
@@ -47,7 +47,7 @@ public class ExpenseStorage {
 
     // Printar ut alla utgifter om listan inte är tom.
     public static void listExpense() {
-        System.out.println("\nEXPENSE");
+        System.out.println("\nEXPENSE ALL");
         if (!expenseList.isEmpty()) {
             System.out.printf("   |%-15s |%-15s |%-15s |%-15s\n", "NAME", "CATEGORY", "AMOUNT", "DATE");
             System.out.println("-".repeat(80));
@@ -57,7 +57,7 @@ public class ExpenseStorage {
             }
         } else System.out.println("List is empty.");
     }
-    // Samma som ovan fast listar efter angiven månad.
+    // Samma som ovan fast listar efter angiven månad och år.
     public static void listExpenseMonth(String month, String year) {
         System.out.println("\nEXPENSE " + Month.getMonth(month) + " " + year);
         if (!expenseList.isEmpty()) {

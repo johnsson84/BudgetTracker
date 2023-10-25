@@ -30,7 +30,7 @@ public class IncomeStorage {
         write.close();
     }
 
-    // Läs in användarens fil, incomeList töms på värden innan ny info läses in.
+    // Läs in användarens fil, incomeList töms på värden innan ny info läses in, om filen finns.
     public static void readFile() throws IOException {
         filename = BudgetTracker.userList.get(BudgetTracker.activeUser).fileIncome();
         path = "src/main/files/" + filename;
@@ -47,7 +47,7 @@ public class IncomeStorage {
 
     // Printar ut all inkomst om listan inte är tom.
     public static void listIncome() {
-        System.out.println("\nINCOME");
+        System.out.println("\nINCOME ALL");
         if (!incomeList.isEmpty()) {
             System.out.printf("   |%-15s |%-15s |%-15s |%-15s\n", "NAME", "CATEGORY", "AMOUNT", "DATE");
             System.out.println("-".repeat(80));
@@ -58,7 +58,7 @@ public class IncomeStorage {
         } else System.out.println("List is empty.");
     }
 
-    // Samma som ovan fast listar efter angiven månad.
+    // Samma som ovan fast listar efter angiven månad och år.
     public static void listIncomeMonth(String month, String year) {
         System.out.println("\nINCOME " + Month.getMonth(month) + " " + year);
         if (!incomeList.isEmpty()) {
